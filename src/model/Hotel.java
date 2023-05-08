@@ -7,19 +7,19 @@ import java.util.ArrayList;
 public class Hotel {
     private String name;
     private String location;
-    private int oneBedPrice;
-    private int twoBedPrice;
-    private ArrayList<HotelAftale> HotelAftale = new ArrayList<>();
 
-    public Hotel(String name, String location, int oneBedPrice, int twoBedPrice, ArrayList<HotelAftale> hotelAftale){
+    private ArrayList<HotelAftale> hotelAftale = new ArrayList<>();
+
+    public Hotel(String name, String location, ArrayList<HotelAftale> hotelAftale){
         this.name = name;
         this.location = location;
-        this.oneBedPrice = oneBedPrice;
-        this.twoBedPrice = twoBedPrice;
     }
 
     public ArrayList<HotelAftale> getHotelAftale(){
         return new ArrayList<HotelAftale>();
+    }
+    public void addHotelAftale(HotelAftale aftale){
+        hotelAftale.add(aftale);
     }
 
 }
