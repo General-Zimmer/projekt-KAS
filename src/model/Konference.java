@@ -3,14 +3,14 @@ package model;
 import java.time.LocalDate;
 
 @SuppressWarnings("unused")
-public class Cumferemsæ {
+public class Konference {
     private String navn;
     private String sted;
     private LocalDate startDato;
     private int varighedDage;
     private float prisPerDag;
 
-    public Cumferemsæ(String navn, String sted, LocalDate startDato, int varighedDage, float prisPerDag) {
+    public Konference(String navn, String sted, LocalDate startDato, int varighedDage, float prisPerDag) {
         this.navn = navn;
         this.sted = sted;
         this.startDato = startDato;

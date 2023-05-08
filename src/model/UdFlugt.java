@@ -4,13 +4,13 @@ import java.time.LocalDate;
 
 public class UdFlugt {
     // Komposition 1..1
-    private final Cumferemsæ cumferemsæ;
+    private final Konference konference;
     private String navn;
     private LocalDate Dato;
     private float pris;
 
-    public UdFlugt(Cumferemsæ cumferemsæ, String navn, LocalDate dato, float pris) {
-        this.cumferemsæ = cumferemsæ;
+    public UdFlugt(Konference konference, String navn, LocalDate dato, float pris) {
+        this.konference = konference;
         this.navn = navn;
         Dato = dato;
         this.pris = pris;
@@ -19,8 +19,8 @@ public class UdFlugt {
 
 
 
-    public Cumferemsæ getCumferemsæ() {
-        return cumferemsæ;
+    public Konference getKonference() {
+        return konference;
     }
 
     public String getNavn() {

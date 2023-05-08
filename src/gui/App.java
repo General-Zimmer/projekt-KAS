@@ -1,6 +1,6 @@
 package gui;
 
-import model.Cumferemsæ;
+import model.Konference;
 
 import java.time.LocalDate;
 
@@ -16,7 +16,7 @@ public class App {
         LocalDate startDate = LocalDate.of(2023,8,01);
         LocalDate endDate = LocalDate.of(2023,8,11);
 
-        Cumferemsæ havOgHimmel = new Cumferemsæ("Hav og Himmel", "Odense Uni", startDate, 10, 1500);
+        Konference havOgHimmel = new Konference("Hav og Himmel", "Odense Uni", startDate, 10, 1500);
 
         //--------------------Deltagere-------------------
 
