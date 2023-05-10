@@ -2,11 +2,11 @@ package model;
 
 import java.util.ArrayList;
 
-public class ledsager extends Person {
+public class Ledsager extends Person {
     private KonferenceDeltager konferenceDeltager;
     private final ArrayList<UdFlugt> udFlugter = new ArrayList<>();
 
-    public ledsager(String name, int age, String telefon, KonferenceDeltager konferenceDeltager) {
+    public Ledsager(String name, int age, String telefon, KonferenceDeltager konferenceDeltager) {
         super(name, age, telefon);
         this.konferenceDeltager = konferenceDeltager;
     }

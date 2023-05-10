@@ -30,7 +30,9 @@ public abstract class Controller {
         return konferenceDeltager;
     }
 
-    public static ledsager createLedsager() {
-
+    public static Ledsager createLedsager(String name, int age, String telefon, KonferenceDeltager konferenceDeltager) {
+        Ledsager ledsager = new Ledsager(name, age, telefon, konferenceDeltager);
+        Storage.addPerson(ledsager);
+        return ledsager;
     }
 }
