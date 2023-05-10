@@ -110,6 +110,13 @@ public class Gui extends Application {
         pane.setVgap(10);
         pane.add(btnOpretKonferencen,0,6);
 
-        btnOpretKonferencen.setOnAction(Event -> opretKonStage.hide());
+        btnOpretKonferencen.setOnAction(Event -> clearAndHide());
+    }
+    private void clearAndHide(){
+        txfStartDato.clear();
+        txfPeriode.clear();
+        txfKonfNavn.clear();
+        txfPrisPrDag.clear();
+        opretKonStage.hide();
     }
 }
