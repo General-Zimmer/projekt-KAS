@@ -22,9 +22,9 @@ public class App {
         Konference havOgHimmel = new Konference("Hav og Himmel", "Odense Uni", startDate, 10, 1500);
 
         //--------------------Deltagere-------------------
-        Person p1 = new Person("Bob", 38, "88888888", Role.DELTAGER);
-        Person p2 = new Person("Alice" ,12, "99999999", Role.DELTAGER);
-        Person p3 = new Person("Bruce", 99, "12345678", Role.DELTAGER);
+        Person p1 = new Person("Bob", 38, "88888888");
+        Person p2 = new Person("Alice" ,12, "99999999");
+        Person p3 = new Person("Bruce", 99, "12345678");
 
     }
 }
