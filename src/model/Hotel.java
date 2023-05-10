@@ -10,7 +10,7 @@ public class Hotel {
 
     private ArrayList<HotelAftale> hotelAftale = new ArrayList<>();
 
-    public Hotel(String name, String location, ArrayList<HotelAftale> hotelAftale){
+    public Hotel(String name, String location){
         this.name = name;
         this.location = location;
     }
