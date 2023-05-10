@@ -2,15 +2,21 @@ package model;
 
 public class Person {
     private String name;
+    private String telefon;
     private int age;
-    private String phone;
     private String firma = null;
 
 
-    public Person(String name, int age, String phone){
+    public Person(String name, int age, String telefon){
         this.name = name;
         this.age = age;
-        this.phone = phone;
+        this.telefon = telefon;
+    }
+    public Person(String name, int age, String telefon, String firma){
+        this.name = name;
+        this.age = age;
+        this.telefon = telefon;
+        this.firma = firma;
     }
 
     public String getFirma() {
@@ -37,12 +43,12 @@ public class Person {
         this.age = age;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getTelefon() {
+        return telefon;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setTelefon(String telefon) {
+        this.telefon = telefon;
     }
 }
 
