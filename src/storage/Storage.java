@@ -10,13 +10,13 @@ public abstract class Storage {
 
     private static final ArrayList<Konference> konferencer = new ArrayList<>();
     private static final ArrayList<Hotel> hoteler = new ArrayList<>();
-    private static final ArrayList<Person> persons = new ArrayList<>();
+    private static final ArrayList<Person> personer = new ArrayList<>();
 
     public static ArrayList<Konference> getKonferencer() {
         return new ArrayList<>(konferencer);
     }
 
-    public static void addKonferencer(Konference konferencer) {
+    public static void addKonference(Konference konferencer) {
         Storage.konferencer.add(konferencer);
     }
 
@@ -28,12 +28,12 @@ public abstract class Storage {
         Storage.hoteler.add(hotel);
     }
 
-    public static ArrayList<Person> getPersons() {
-        return new ArrayList<>(persons);
+    public static ArrayList<Person> getPersoner() {
+        return new ArrayList<>(personer);
     }
 
     public static void addPerson(Person person) {
-        Storage.persons.add(person);
+        Storage.personer.add(person);
     }
 
 
