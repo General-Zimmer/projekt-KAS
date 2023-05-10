@@ -1,9 +1,6 @@
 package controller;
 
-import model.Hotel;
-import model.Konference;
-import model.Person;
-import model.Role;
+import model.*;
 import storage.Storage;
 
 import java.time.LocalDate;
@@ -23,10 +20,14 @@ public abstract class Controller {
         return hotel;
     }
 
-    public static Person CreatePerson(String name, int age, String phone, Role role) {
+    public static Person createPerson(String name, int age, String phone, Role role) {
         Person person = new Person(name, age, phone, role);
         Storage.addPerson(person);
         return person;
 
+    }
+
+    public static HotelAftale createHotelAftale(int oneBedPrice, int twoBedPrice, int periode, LocalDate startDato, Hotel hotel) {
+        return new HotelAftale(oneBedPrice, twoBedPrice, periode, startDato, hotel);
     }
 }

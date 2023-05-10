@@ -9,6 +9,7 @@ public class Konference {
     private LocalDate startDato;
     private int varighedDage;
     private float prisPerDag;
+    private Hotel hotel;
 
     public Konference(String navn, String sted, LocalDate startDato, int varighedDage, float prisPerDag) {
         this.navn = navn;
@@ -60,5 +61,13 @@ public class Konference {
 
     public void setPrisPerDag(float prisPerDag) {
         this.prisPerDag = prisPerDag;
+    }
+
+    public Hotel getHotel() {
+        return hotel;
+    }
+
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
     }
 }
