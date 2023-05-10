@@ -8,9 +8,9 @@ import java.util.ArrayList;
 
 public abstract class Storage {
 
-    public static ArrayList<Konference> konferencer = new ArrayList<>();
-    public static ArrayList<Hotel> hoteler = new ArrayList<>();
-    public static ArrayList<Person> person = new ArrayList<>();
+    private static final ArrayList<Konference> konferencer = new ArrayList<>();
+    private static final ArrayList<Hotel> hoteler = new ArrayList<>();
+    private static final ArrayList<Person> persons = new ArrayList<>();
 
     public static ArrayList<Konference> getKonferencer() {
         return new ArrayList<>(konferencer);
@@ -27,4 +27,14 @@ public abstract class Storage {
     public static void addHoteler(Hotel hotel) {
         Storage.hoteler.add(hotel);
     }
+
+    public static ArrayList<Person> getPersons() {
+        return new ArrayList<>(persons);
+    }
+
+    public static void addPerson(Person person) {
+        Storage.persons.add(person);
+    }
+
+
 }
