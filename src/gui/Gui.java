@@ -9,6 +9,7 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import model.Hotel;
 import model.Konference;
+import org.w3c.dom.events.Event;
 
 public class Gui extends Application {
 
@@ -19,6 +20,9 @@ public class Gui extends Application {
     private final TextField txfPeriode = new TextField();
     private final TextField txfKonfNavn = new TextField();
     private final TextField txfPrisPrDag = new TextField();
+    private final Button btnOpretKonferencen = new Button("Opret Konference");
+
+    private Stage opretKonStage;
 
 
 
@@ -40,9 +44,36 @@ public class Gui extends Application {
 
 
     private void initContent(GridPane pane) {
+
         Label konferenceLabel = new Label("Konference");
         pane.add(konferenceLabel,0,0);
         pane.add(lvwKonfListe,0,1);
+
+        pane.add(btnOpretKonf,1 ,6);
+        HBox hbox5 = new HBox();
+        hbox5.getChildren().addAll(btnOpretKonf);
+        pane.add(hbox5,0,6);
+
+
+        btnOpretKonf.setOnAction(Event -> createKonferencePopup());
+
+        opretKonStage = new Stage();
+        opretKonStage.setTitle("Konference bookingssystem");
+        GridPane konPane = new GridPane();
+        this.initContentForConferenceBooking(konPane);
+
+
+
+        Scene scene = new Scene(konPane);
+        opretKonStage.setScene(scene);
+        opretKonStage.setResizable(false);
+        opretKonStage.hide();
+    }
+    public void createKonferencePopup() {
+
+        opretKonStage.show();
+    }
+    private void initContentForConferenceBooking(GridPane pane){
         Label lblStartDato = new Label("Startdato");
         pane.add(lblStartDato,0,2);
         pane.add(txfStartDato,1,2);
@@ -52,13 +83,11 @@ public class Gui extends Application {
         Label lblKonfNavn = new Label("Konference");
         pane.add(lblKonfNavn,0,4);
         pane.add(txfKonfNavn,1,4);
-        pane.add(btnOpretKonf,1 ,6);
+
         Label lblPris = new Label("Pris pr dag");
         pane.add(lblPris,0,5);
         pane.add(txfPrisPrDag,1,5);
         HBox hbox4 = new HBox();
-
-
 
         HBox hbox1 = new HBox();
         hbox1.getChildren().addAll(lblStartDato, txfStartDato);
@@ -75,15 +104,12 @@ public class Gui extends Application {
         hbox4.getChildren().addAll(lblPris, txfPrisPrDag);
         pane.add(hbox4,0,5);
         hbox4.setSpacing(12);
-        HBox hbox5 = new HBox();
-        hbox5.getChildren().addAll(btnOpretKonf);
-        pane.add(hbox5,0,6);
 
+        pane.setPadding(new Insets(10));
+        pane.setHgap(10);
+        pane.setVgap(10);
+        pane.add(btnOpretKonferencen,0,6);
 
-
-
+        btnOpretKonferencen.setOnAction(Event -> opretKonStage.hide());
     }
-
-
-
 }
