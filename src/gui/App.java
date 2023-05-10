@@ -11,6 +11,7 @@ import model.Role;
 public class App {
     public static void main(String[] args) {
         Application.launch(Gui.class);
+        initStorage();
     }
 
     public static void initStorage(){
