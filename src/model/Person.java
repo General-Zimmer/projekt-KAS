@@ -1,30 +1,14 @@
 package model;
 
-public class Person {
+public abstract class Person {
     private String name;
     private String telefon;
     private int age;
-    private String firma = null;
-
 
     public Person(String name, int age, String telefon){
         this.name = name;
         this.age = age;
         this.telefon = telefon;
-    }
-    public Person(String name, int age, String telefon, String firma){
-        this.name = name;
-        this.age = age;
-        this.telefon = telefon;
-        this.firma = firma;
-    }
-
-    public String getFirma() {
-        return firma;
-    }
-
-    public void setFirma(String firma) {
-        this.firma = firma;
     }
 
     public String getName() {
