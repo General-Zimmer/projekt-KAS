@@ -1,6 +1,8 @@
 package model;
 
+import java.sql.PseudoColumnUsage;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 @SuppressWarnings("unused")
 public class Konference {
@@ -10,6 +12,7 @@ public class Konference {
     private int varighedDage;
     private float prisPerDag;
     private Hotel hotel;
+    private final ArrayList<Person> personer = new ArrayList<>();
 
     public Konference(String navn, String sted, LocalDate startDato, int varighedDage, float prisPerDag) {
         this.navn = navn;
@@ -17,6 +20,17 @@ public class Konference {
         this.startDato = startDato;
         this.varighedDage = varighedDage;
         this.prisPerDag = prisPerDag;
+    }
+
+    public void addPerson(Person person) {
+        personer.add(person);
+    }
+    public void removePerson(Person person) {
+        personer.remove(person);
+    }
+
+    public ArrayList<Person> getPersoner() {
+        return new ArrayList<>(personer);
     }
 
     public LocalDate getSlutDato() {
