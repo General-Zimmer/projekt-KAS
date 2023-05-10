@@ -2,6 +2,7 @@ package storage;
 
 import model.Hotel;
 import model.Konference;
+import model.Person;
 
 import java.util.ArrayList;
 
@@ -9,7 +10,7 @@ public abstract class Storage {
 
     public static ArrayList<Konference> konferencer = new ArrayList<>();
     public static ArrayList<Hotel> hoteler = new ArrayList<>();
-    public static ArrayList<> = new ArrayList<>();
+    public static ArrayList<Person> person = new ArrayList<>();
 
     public static ArrayList<Konference> getKonferencer() {
         return new ArrayList<>(konferencer);
