@@ -4,14 +4,21 @@ public class Person {
     private String name;
     private int age;
     private String phone;
-    private Role role;
+    private String firma = null;
 
 
-    public Person(String name, int age, String phone, Role role){
+    public Person(String name, int age, String phone){
         this.name = name;
         this.age = age;
         this.phone = phone;
-        this.role = role;
+    }
+
+    public String getFirma() {
+        return firma;
+    }
+
+    public void setFirma(String firma) {
+        this.firma = firma;
     }
 
     public String getName() {
@@ -36,14 +43,6 @@ public class Person {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
     }
 }
 
