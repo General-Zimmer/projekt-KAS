@@ -10,8 +10,8 @@ import model.Role;
 
 public class App {
     public static void main(String[] args) {
-        Application.launch(Gui.class);
         initStorage();
+        Application.launch(Gui.class);
     }
 
     public static void initStorage(){
