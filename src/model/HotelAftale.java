@@ -1,8 +1,5 @@
 package model;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-
 public class HotelAftale {
     private final int prisDagEnkelt;
     private final int prisDagDobbelt;
