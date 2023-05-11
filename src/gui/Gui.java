@@ -1,6 +1,7 @@
 package gui;
 
 import javafx.application.Application;
+import javafx.event.Event;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -9,7 +10,6 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import model.Hotel;
 import model.Konference;
-import org.w3c.dom.events.Event;
 import model.Person;
 
 public class Gui extends Application {
@@ -27,11 +27,17 @@ public class Gui extends Application {
     private final Button btnOpretDeltager = new Button("Opret Deltager");
     private Stage opretKonStage;
     private Stage opretHotelStage;
-    private TextField txfHotelNavn = new TextField();
-    private TextField txfPlacering = new TextField();
-    private Button btnOpretHotel2 = new Button("Opret Hotel");
+    private final TextField txfHotelNavn = new TextField();
+    private final TextField txfPlacering = new TextField();
+    private final Button btnOpretHotel2 = new Button("Opret Hotel");
     private Stage opretPersonStage;
+    private final TextField txfDeltagerNavn = new TextField();
+    private final TextField txftlf = new TextField();
 
+    private final Button btnOpretDeltager2 = new Button("Opret deltager");
+    private final CheckBox wifi = new CheckBox("Wifi");
+    private final CheckBox morgenmad = new CheckBox("Morgenmad");
+    private final CheckBox andet = new CheckBox("Andet");
 
 
     @Override
@@ -85,18 +91,19 @@ public class Gui extends Application {
 
 
 //----------------konference popup-----------
-        btnOpretKonf.setOnAction(Event -> createKonferencePopup());
+
 
         opretKonStage = new Stage();
         opretKonStage.setTitle("Konference bookingssystem");
         GridPane konPane = new GridPane();
         this.initContentForConferenceBooking(konPane);
 
-        Scene scene = new Scene(konPane);
-        opretKonStage.setScene(scene);
+        Scene konScene = new Scene(konPane);
+        opretKonStage.setScene(konScene);
         opretKonStage.setResizable(false);
         opretKonStage.hide();
 
+        btnOpretKonf.setOnAction(Event -> createKonferencePopup());
 
 //------------Hotel popup-----------------------
 
@@ -111,6 +118,19 @@ public class Gui extends Application {
         opretHotelStage.hide();
 
         btnOpretHotel.setOnAction(Event -> createHotelPopup());
+
+//-----------------Deltager popup------------
+        opretPersonStage = new Stage();
+        opretPersonStage.setTitle("Deltager oprettelse");
+        GridPane deltagerPane = new GridPane();
+        this.initcontentDeltager(deltagerPane);
+
+        Scene deltagerScene = new Scene(deltagerPane);
+        opretPersonStage.setScene(deltagerScene);
+        opretPersonStage.setResizable(false);
+        opretPersonStage.hide();
+
+        btnOpretDeltager.setOnAction(Event -> createDeltagerPopup());
     }
     public void createKonferencePopup() {
 
@@ -120,6 +140,9 @@ public class Gui extends Application {
     public void createHotelPopup(){
         opretHotelStage.show();
 
+    }
+    public void createDeltagerPopup(){
+        opretPersonStage.show();
     }
     private void initContentForConferenceBooking(GridPane pane){
         Label lblStartDato = new Label("Startdato");
@@ -159,13 +182,8 @@ public class Gui extends Application {
         pane.add(btnOpretKonferencen,0,6);
 
         btnOpretKonferencen.setOnAction(Event -> clearAndHide());
-    }
-    private void clearAndHide(){
-        txfStartDato.clear();
-        txfPeriode.clear();
-        txfKonfNavn.clear();
-        txfPrisPrDag.clear();
-        opretKonStage.hide();
+        btnOpretHotel2.setOnAction(Event -> clearAndHideHotel());
+        btnOpretDeltager2.setOnAction((Event -> clearAndHideDeltager()));
     }
     public void initContentCreateHotel(GridPane pane){
         Label hotelNavn = new Label("Hotel Navn");
@@ -174,14 +192,7 @@ public class Gui extends Application {
         Label hotelPlacering = new Label("Placering");
         pane.add(hotelPlacering,0,3);
         pane.add(txfPlacering,1,3);
-        Label lblKonfNavn = new Label("Konference");
-        pane.add(lblKonfNavn,0,4);
-        pane.add(txfKonfNavn,1,4);
 
-        Label lblPris = new Label("Pris pr dag");
-        pane.add(lblPris,0,5);
-        pane.add(txfPrisPrDag,1,5);
-        HBox hbox4 = new HBox();
 
         HBox hbox1 = new HBox();
         hbox1.getChildren().addAll(hotelNavn, txfHotelNavn);
@@ -193,10 +204,58 @@ public class Gui extends Application {
         pane.add(hBox2,0,3);
 
 
+        HBox hbox3 = new HBox();
+        hbox3.getChildren().addAll(wifi,morgenmad,andet);
+        pane.add(hbox3,0,5);
+
+
         pane.setPadding(new Insets(10));
         pane.setHgap(10);
         pane.setVgap(10);
         pane.add(btnOpretHotel2,0,6);
     }
 
+    public void initcontentDeltager(GridPane pane){
+        Label lblDeltagerNavn = new Label("Deltager Navn:");
+        pane.add(lblDeltagerNavn,0,2);
+        pane.add(txfDeltagerNavn,1,2);
+        Label tlf = new Label("Telefon nr:");
+        pane.add(tlf,0,3);
+        pane.add(txftlf,1,3);
+
+        HBox hbox1 = new HBox();
+        hbox1.getChildren().addAll(lblDeltagerNavn, txfDeltagerNavn);
+        hbox1.setSpacing(22);
+        pane.add(hbox1,0,2);
+        HBox hBox2 = new HBox();
+        hBox2.getChildren().addAll(tlf, txftlf);
+        hBox2.setSpacing(45);
+        pane.add(hBox2,0,3);
+
+        pane.setPadding(new Insets(10));
+        pane.setHgap(10);
+        pane.setVgap(10);
+
+        pane.add(btnOpretDeltager2,0,5);
+    }
+    private void clearAndHide(){
+        txfStartDato.clear();
+        txfPeriode.clear();
+        txfKonfNavn.clear();
+        txfPrisPrDag.clear();
+        opretKonStage.hide();
+    }
+    private void clearAndHideHotel(){
+        txfHotelNavn.clear();
+        txfPlacering.clear();
+        opretHotelStage.hide();
+        wifi.setSelected(false);
+        morgenmad.setSelected(false);
+        andet.setSelected(false);
+    }
+    private void clearAndHideDeltager(){
+        txfDeltagerNavn.clear();
+        txftlf.clear();
+        opretPersonStage.hide();
+    }
 }
