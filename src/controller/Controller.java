@@ -5,6 +5,7 @@ import storage.Storage;
 
 import java.time.LocalDate;
 
+@SuppressWarnings("unused")
 public abstract class Controller {
 
     public static Konference createKonference(String name, String sted, LocalDate startDate, int periode, float dayPrice) {
