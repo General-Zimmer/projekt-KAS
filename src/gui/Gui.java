@@ -182,8 +182,8 @@ public class Gui extends Application {
         pane.add(btnOpretKonferencen,0,6);
 
         btnOpretKonferencen.setOnAction(Event -> clearAndHide());
-        btnOpretHotel2.setOnAction(Event -> clearAndHideHotel());
-        btnOpretDeltager2.setOnAction((Event -> clearAndHideDeltager()));
+
+        opretKonStage.setAlwaysOnTop(true);
     }
     public void initContentCreateHotel(GridPane pane){
         Label hotelNavn = new Label("Hotel Navn");
@@ -200,7 +200,7 @@ public class Gui extends Application {
         pane.add(hbox1,0,2);
         HBox hBox2 = new HBox();
         hBox2.getChildren().addAll(hotelPlacering, txfPlacering);
-        hBox2.setSpacing(30);
+        hBox2.setSpacing(33);
         pane.add(hBox2,0,3);
 
 
@@ -213,6 +213,9 @@ public class Gui extends Application {
         pane.setHgap(10);
         pane.setVgap(10);
         pane.add(btnOpretHotel2,0,6);
+
+        opretHotelStage.setAlwaysOnTop(true);
+        btnOpretHotel2.setOnAction(Event -> clearAndHideHotel());
     }
 
     public void initcontentDeltager(GridPane pane){
@@ -235,8 +238,10 @@ public class Gui extends Application {
         pane.setPadding(new Insets(10));
         pane.setHgap(10);
         pane.setVgap(10);
+        opretPersonStage.setAlwaysOnTop(true);
 
         pane.add(btnOpretDeltager2,0,5);
+        btnOpretDeltager2.setOnAction((Event -> clearAndHideDeltager()));
     }
     private void clearAndHide(){
         txfStartDato.clear();
