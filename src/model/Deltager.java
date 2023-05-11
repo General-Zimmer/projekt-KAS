@@ -2,19 +2,19 @@ package model;
 
 import java.util.ArrayList;
 
-public class KonferenceDeltager extends Person{
-    private String email;
+@SuppressWarnings("unused")
+public class Deltager extends Person{
     private String firma = null;
     private final ArrayList<Tilmeld> tilmeldelser = new ArrayList<>();
 
-    public KonferenceDeltager(String name, int age, String telefon, String email, String firma) {
-        super(name, age, telefon);
-        this.email = email;
+
+
+    public Deltager(String name, String telefon, String firma) {
+        super(name, telefon);
         this.firma = firma;
     }
-    public KonferenceDeltager(String name, int age, String telefon, String email) {
-        super(name, age, telefon);
-        this.email = email;
+    public Deltager(String name, String telefon) {
+        super(name, telefon);
     }
 
     public void addTilmeldelse(Tilmeld tilmeldelse) {
@@ -22,14 +22,6 @@ public class KonferenceDeltager extends Person{
     }
     public ArrayList<Tilmeld> getTilmeldelser() {
         return new ArrayList<>(tilmeldelser);
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getFirma() {

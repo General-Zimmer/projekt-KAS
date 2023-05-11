@@ -24,14 +24,14 @@ public abstract class Controller {
         return new HotelAftale(oneBedPrice, twoBedPrice, periode, startDato, hotel);
     }
 
-    public static KonferenceDeltager createDeltager(String name, int age, String telefon, String email, String firma) {
-        KonferenceDeltager konferenceDeltager = new KonferenceDeltager(name, age, telefon, email, firma);
-        Storage.addPerson(konferenceDeltager);
-        return konferenceDeltager;
+    public static Deltager createDeltager(String name, int age, String telefon, String email, String firma) {
+        Deltager deltager = new Deltager(name, age, telefon, email, firma);
+        Storage.addPerson(deltager);
+        return deltager;
     }
 
-    public static Ledsager createLedsager(String name, int age, String telefon, KonferenceDeltager konferenceDeltager) {
-        Ledsager ledsager = new Ledsager(name, age, telefon, konferenceDeltager);
+    public static Ledsager createLedsager(String name, int age, String telefon, Deltager deltager) {
+        Ledsager ledsager = new Ledsager(name, age, telefon, deltager);
         Storage.addPerson(ledsager);
         return ledsager;
     }
