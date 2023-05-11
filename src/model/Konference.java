@@ -11,7 +11,7 @@ public class Konference {
     private int varighedDage;
     private float prisPerDag;
     private final ArrayList<HotelAftale> hotelAftaler = new ArrayList<>();
-    private final ArrayList<UdFlugt> udflugter = new ArrayList<>();
+    private final ArrayList<UdFlugt> udFlugter = new ArrayList<>();
     private final ArrayList<Person> personer = new ArrayList<>();
 
     public Konference(String navn, String sted, LocalDate startDato, int varighedDage, float prisPerDag) {

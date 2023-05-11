@@ -26,14 +26,15 @@ public abstract class Controller {
     }
 
     public static Deltager createDeltager(String name, String telefon, String firma) {
-        Deltager deltager = new Deltager(name, telefon, firma);
-        Storage.addPerson(deltager);
-        return deltager;
+        return (Deltager) Storage.addPerson(new Deltager(name, telefon, firma));
     }
 
     public static Ledsager createLedsager(String name, String telefon, Deltager deltager) {
-        Ledsager ledsager = new Ledsager(name, telefon, deltager);
-        Storage.addPerson(ledsager);
-        return ledsager;
+        return (Ledsager) Storage.addPerson(new Ledsager(name, telefon, deltager));
+
+    }
+
+    public static UdFlugt createUdflugt(Konference konference, String navn, LocalDate dato, float pris) {
+        return Storage.addUdflugt(new UdFlugt(konference, navn, dato, pris));
     }
 }
