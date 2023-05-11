@@ -37,4 +37,8 @@ public abstract class Controller {
     public static UdFlugt createUdflugt(Konference konference, String navn, LocalDate dato, float pris) {
         return Storage.addUdflugt(new UdFlugt(konference, navn, dato, pris));
     }
+
+    public static void createTilkøb(Hotel hotel, String navn, double pris) {
+        hotel.addTilkøb(new TilKøb(navn, pris));
+    }
 }
