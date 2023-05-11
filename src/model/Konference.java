@@ -1,6 +1,5 @@
 package model;
 
-import java.sql.PseudoColumnUsage;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -11,8 +10,7 @@ public class Konference {
     private LocalDate startDato;
     private int varighedDage;
     private float prisPerDag;
-    private Hotel hotel;
-    private final ArrayList<HotelAftale> hotelAftaler= new ArrayList<>();
+    private final ArrayList<HotelAftale> hotelAftaler = new ArrayList<>();
     private final ArrayList<UdFlugt> udflugter = new ArrayList<>();
     private final ArrayList<Person> personer = new ArrayList<>();
 
@@ -77,13 +75,5 @@ public class Konference {
 
     public void setPrisPerDag(float prisPerDag) {
         this.prisPerDag = prisPerDag;
-    }
-
-    public Hotel getHotel() {
-        return hotel;
-    }
-
-    public void setHotel(Hotel hotel) {
-        this.hotel = hotel;
     }
 }

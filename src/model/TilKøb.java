@@ -1,6 +1,7 @@
 package model;
 
-public class Bekvemelighed {
+@SuppressWarnings("unused")
+public class TilKøb {
     private String navn;
     private double pris;
 }

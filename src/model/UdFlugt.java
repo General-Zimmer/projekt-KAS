@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class UdFlugt {
     // Komposition 1..1
@@ -8,6 +9,7 @@ public class UdFlugt {
     private String navn;
     private LocalDate Dato;
     private float pris;
+    private final ArrayList<Ledsager> ledsagere = new ArrayList<>();
 
     public UdFlugt(Konference konference, String navn, LocalDate dato, float pris) {
         this.konference = konference;
@@ -15,9 +17,6 @@ public class UdFlugt {
         Dato = dato;
         this.pris = pris;
     }
-
-
-
 
     public Konference getKonference() {
         return konference;

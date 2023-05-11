@@ -5,8 +5,6 @@ import model.Konference;
 import java.time.LocalDate;
 
 import javafx.application.Application;
-import model.Person;
-import model.Role;
 
 public class App {
     public static void main(String[] args) {

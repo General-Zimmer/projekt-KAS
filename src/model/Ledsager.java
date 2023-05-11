@@ -2,13 +2,14 @@ package model;
 
 import java.util.ArrayList;
 
+@SuppressWarnings("unused")
 public class Ledsager extends Person {
-    private KonferenceDeltager konferenceDeltager;
+    private Deltager deltager;
     private final ArrayList<UdFlugt> udFlugter = new ArrayList<>();
 
-    public Ledsager(String name, int age, String telefon, KonferenceDeltager konferenceDeltager) {
-        super(name, age, telefon);
-        this.konferenceDeltager = konferenceDeltager;
+    public Ledsager(String name, String telefon, Deltager deltager) {
+        super(name, telefon);
+        this.deltager = deltager;
     }
 
     public void addUdFlugt(UdFlugt udFlugt) {
@@ -17,5 +18,13 @@ public class Ledsager extends Person {
 
     public ArrayList<UdFlugt> getUdFlugter() {
         return new ArrayList<>(udFlugter);
+    }
+
+    public Deltager getDeltager() {
+        return deltager;
+    }
+
+    public void setDeltager(Deltager deltager) {
+        this.deltager = deltager;
     }
 }
