@@ -1,9 +1,6 @@
 package storage;
 
-import model.Hotel;
-import model.Konference;
-import model.Person;
-import model.UdFlugt;
+import model.*;
 
 import java.util.ArrayList;
 
@@ -14,6 +11,16 @@ public abstract class Storage {
     private static final ArrayList<Hotel> hoteler = new ArrayList<>();
     private static final ArrayList<Person> personer = new ArrayList<>();
     private static final ArrayList<UdFlugt> udflugter = new ArrayList<>();
+    public static final ArrayList<TilKøb> tilKøbene = new ArrayList<>();
+
+    public static TilKøb addTilkøb(TilKøb tilKøb) {
+        tilKøbene.add(tilKøb);
+        return tilKøb;
+    }
+
+    public static ArrayList<TilKøb> getTilkøb() {
+        return new ArrayList<>(tilKøbene);
+    }
 
     public static UdFlugt addUdflugt(UdFlugt udFlugt) {
         udflugter.add(udFlugt);
@@ -35,6 +42,8 @@ public abstract class Storage {
     public static ArrayList<Hotel> getHoteler() {
         return new ArrayList<>(hoteler);
     }
+
+
 
     public static Hotel addHoteler(Hotel hotel) {
         Storage.hoteler.add(hotel);

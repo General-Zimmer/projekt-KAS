@@ -11,5 +11,39 @@ public class Ophold {
     private LocalDate startDato;
     private int periode;
 
+    public HotelAftale getHotelAftale() {
+        return hotelAftale;
+    }
 
+    public void setHotelAftale(HotelAftale hotelAftale) {
+        this.hotelAftale = hotelAftale;
+    }
+
+    public Deltager getDeltager() {
+        return deltager;
+    }
+
+    public void setDeltager(Deltager deltager) {
+        this.deltager = deltager;
+    }
+
+    public ArrayList<TilKøb> getTilKøb() {
+        return tilKøb;
+    }
+
+    public LocalDate getStartDato() {
+        return startDato;
+    }
+
+    public void setStartDato(LocalDate startDato) {
+        this.startDato = startDato;
+    }
+
+    public int getPeriode() {
+        return periode;
+    }
+
+    public void setPeriode(int periode) {
+        this.periode = periode;
+    }
 }

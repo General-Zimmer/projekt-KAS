@@ -50,17 +50,14 @@ public abstract class Controller {
         return Storage.addUdflugt(new UdFlugt(konference, navn, dato, pris));
     }
 
-    public static void createTilkøb(Hotel hotel, String navn, double pris) {
-        hotel.addTilkøb(new TilKøb(navn, pris));
+    public static TilKøb createTilkøb(Hotel hotel, String navn, double pris) {
+        TilKøb tilKøb = new TilKøb(navn, pris);
+        hotel.addTilkøb(tilKøb);
+        return Storage.addTilkøb(tilKøb);
     }
 
     public static ArrayList<TilKøb> getAllTilkøb() {
-        ArrayList<Hotel> hoteler = Storage.getHoteler();
-        for (Hotel hotel : hoteler)
-            for (TilKøb tilKøb : hotel.getTilkøb()) {
-
-            }
-        return null;
+        return Storage.getTilkøb();
     }
 
     public static ArrayList<TilKøb> getTilkøb(Hotel hotel) {
@@ -69,6 +66,16 @@ public abstract class Controller {
 
     public static double getSamletPris(Tilmeld tilmeld) {
         double samletPris = tilmeld.getKonference().getPrisPerDag()*tilmeld.getKonference().getVarighedDage();
-        return 0;
+        for (Ophold ophold : tilmeld.getOphold()) {
+            HotelAftale aftale = ophold.getHotelAftale();
+            samletPris += ophold.getPeriode()*(aftale.getPrisDagEnkelt()+aftale.getPrisDagDobbelt());
+
+            for (TilKøb tilKøb : ophold.getTilKøb())
+                samletPris += tilKøb.getPris();
+
+            for (UdFlugt udFlugt : ophold.getDeltager().get)
+        }
+
+        return samletPris;
     }
 }
