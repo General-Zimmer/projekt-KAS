@@ -1,10 +1,13 @@
 package gui;
 
+import controller.Controller;
+import model.Hotel;
 import model.Konference;
 
 import java.time.LocalDate;
 
 import javafx.application.Application;
+import model.TilKøb;
 
 public class App {
     public static void main(String[] args) {
@@ -14,18 +17,19 @@ public class App {
 
     public static void initStorage(){
         //-------------------Hav og himmel--------------
-        LocalDate startDate = LocalDate.of(2023,8,01);
-        LocalDate endDate = LocalDate.of(2023,8,11);
+        LocalDate startDate = LocalDate.of(2023,8, 1);
 
-        Konference havOgHimmel = new Konference("Hav og Himmel", "Odense Uni", startDate, 10, 1500);
+        Controller.createKonference("Hav og Himmel", "Odense Uni", startDate, 10, 1500);
 
         //--------------------Deltagere-------------------
-        /*
-        Person p1 = new Person("Bob", 38, "88888888");
-        Person p2 = new Person("Alice" ,12, "99999999");
-        Person p3 = new Person("Bruce", 99, "12345678");
 
+        Hotel paradise = Controller.createHotel("Paradise");
+        paradise.addTilkøb(new TilKøb("Wii tank", 50));
+        paradise.addTilkøb(new TilKøb("Warhammer 40k: Dark Tide", 150));
+        paradise.addTilkøb(new TilKøb("Extra blød bed", 9001));
+        paradise.addTilkøb(new TilKøb("pc med RTX 3080TI + 7900x", 10000));
+        paradise.addTilkøb(new TilKøb("Danskvand", 20));
+        paradise.addTilkøb(new TilKøb("Risk of Rain 2", 100));
 
-         */
     }
 }

@@ -9,6 +9,9 @@ import java.util.ArrayList;
 @SuppressWarnings("unused")
 public abstract class Controller {
 
+    /**
+     * Create a konference
+     */
     public static Konference createKonference(String name, String sted, LocalDate startDate, int periode, float dayPrice) {
         Konference konference = new Konference(name, sted, startDate, periode, dayPrice);
 
@@ -16,12 +19,20 @@ public abstract class Controller {
         return konference;
     }
 
+    /**
+     *
+     * Creates Hotel
+     */
     public static Hotel createHotel(String name) {
         Hotel hotel = new Hotel(name);
         Storage.addHoteler(hotel);
         return hotel;
     }
 
+    /**
+     *
+     *
+     */
     public static HotelAftale createHotelAftale(int prisDagEnkelt, int prisDagDobbelt, Hotel hotel) {
         return new HotelAftale(prisDagEnkelt, prisDagDobbelt, hotel);
     }
@@ -54,5 +65,10 @@ public abstract class Controller {
 
     public static ArrayList<TilKøb> getTilkøb(Hotel hotel) {
         return hotel.getTilkøb();
+    }
+
+    public static double getSamletPris(Tilmeld tilmeld) {
+        double samletPris = tilmeld.getKonference().getPrisPerDag()*tilmeld.getKonference().getVarighedDage();
+        return 0;
     }
 }
