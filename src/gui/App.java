@@ -24,12 +24,12 @@ public class App {
         //--------------------Deltagere-------------------
 
         Hotel paradise = Controller.createHotel("Paradise");
-        paradise.addTilkøb(new TilKøb("Wii tank", 50));
-        paradise.addTilkøb(new TilKøb("Warhammer 40k: Dark Tide", 150));
-        paradise.addTilkøb(new TilKøb("Extra blød bed", 9001));
-        paradise.addTilkøb(new TilKøb("pc med RTX 3080TI + 7900x", 10000));
-        paradise.addTilkøb(new TilKøb("Danskvand", 20));
-        paradise.addTilkøb(new TilKøb("Risk of Rain 2", 100));
+        Controller.createTilkøb(paradise,"Wii tank", 50);
+        Controller.createTilkøb(paradise,"Warhammer 40k: Dark Tide", 150);
+        Controller.createTilkøb(paradise,"Extra blød bed", 9001);
+        Controller.createTilkøb(paradise,"pc med RTX 3080TI + 7900x", 10000);
+        Controller.createTilkøb(paradise,"Danskvand", 20);
+        Controller.createTilkøb(paradise,"Risk of Rain 2", 100);
 
     }
 }
