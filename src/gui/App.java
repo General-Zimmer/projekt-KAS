@@ -31,5 +31,9 @@ public class App {
         Controller.createTilkøb(paradise,"Danskvand", 20);
         Controller.createTilkøb(paradise,"Risk of Rain 2", 100);
 
+        Controller.createDeltager("Bob Swanson", "88888888"," ");
+        Controller.createDeltager("Scarlet Johanson", "12345678", "Marvel");
+        Controller.createDeltager("Big Dick Zimmer", "09127623", "WiseCraft");
+
     }
 }
