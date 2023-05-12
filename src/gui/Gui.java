@@ -20,7 +20,6 @@ public class Gui extends Application {
     private final ListView<Konference> lvwKonfListe = new ListView<>();
     private final ListView<Person> lvwPersoner = new ListView<>();
     private final ListView<TilKøb> lvwGetTilkøb = new ListView<>();
-    private final ComboBox<Hotel> cbbHotel = new ComboBox<>();
     private final Button btnOpretKonf = new Button("Opret Konference");
     private final TextField txfStartDato = new TextField();
     private final TextField txfPeriode = new TextField();
@@ -34,6 +33,7 @@ public class Gui extends Application {
     private Stage opretPersonStage;
     private Stage opretKonStage;
     private Stage opretHotelStage;
+    private Stage opretUdlugtStage;
     private final TextField txfDeltagerNavn = new TextField();
     private final TextField txftlf = new TextField();
 
@@ -45,6 +45,11 @@ public class Gui extends Application {
     CheckBox cbShowLedsager = new CheckBox("Tilføj ledsager?");
     private final TextField txfFirma = new TextField();
     private final TextField txfPlacering = new TextField();
+    private final Button btnOpretUdflugt = new Button("Opret udflugt");
+    private final TextField txfUdflugtNavn = new TextField();
+    private final Button btnOpretUdflugt2 = new Button("Opret udflugt");
+
+
 
 
     @Override
@@ -84,7 +89,6 @@ public class Gui extends Application {
         hbox6.getChildren().addAll(btnOpretDeltager);
         pane.add(hbox6,5,5);
 
-
         Label konferenceLabel = new Label("Konference");
         pane.add(konferenceLabel,0,0);
         pane.add(lvwKonfListe,0,1);
@@ -96,6 +100,10 @@ public class Gui extends Application {
         Label deltagerLabel = new Label("Deltager");
         pane.add(deltagerLabel,5,0);
         pane.add(lvwPersoner,5,1);
+
+        HBox hbox8 = new HBox();
+        hbox8.getChildren().addAll(btnOpretUdflugt);
+        pane.add(hbox8,7,5);
 
 
 
@@ -139,10 +147,25 @@ public class Gui extends Application {
         opretPersonStage.setResizable(false);
         opretPersonStage.hide();
 
+        //----------------Udflugt popup--------------
+        opretUdlugtStage = new Stage();
+        opretUdlugtStage.setTitle("Opret udflugt");
+        GridPane udflugtPane = new GridPane();
+        this.initContentUdflugt(udflugtPane);
+
+        Scene udflugtScene = new Scene(udflugtPane);
+        opretUdlugtStage.setScene(udflugtScene);
+        opretUdlugtStage.setResizable(false);
+        opretUdlugtStage.hide();
 
 
+        //-----------initcontent-------
+        lvwHoteller.getItems().addAll(Controller.getHoteller());
+        lvwKonfListe.getItems().addAll(Controller.getKonferencer());
+        lvwPersoner.getItems().addAll(Controller.getDeltagere());
 
         btnOpretDeltager.setOnAction(Event -> createDeltagerPopup());
+        btnOpretUdflugt.setOnAction(Event -> createUdflugtPopup());
     }
     public void createKonferencePopup() {
 
@@ -151,7 +174,9 @@ public class Gui extends Application {
 
     public void createHotelPopup(){
         opretHotelStage.show();
-
+    }
+    public void createUdflugtPopup(){
+        opretUdlugtStage.show();
     }
     public void createDeltagerPopup(){
         opretPersonStage.show();
@@ -211,15 +236,20 @@ public class Gui extends Application {
         HBox hbox1 = new HBox();
         hbox1.getChildren().addAll(hotelNavn, txfHotelNavn);
         hbox1.setSpacing(22);
-        pane.add(hbox1,0,2);
+        pane.add(hbox1,0,1);
         HBox hBox2 = new HBox();
 
-
+/*
         HBox hbox3 = new HBox();
         hbox3.getChildren().addAll(wifi,morgenmad,andet);
         hbox3.setSpacing(15);
         pane.add(hbox3,0,4);
-
+ */
+        Label lbltilkøb = new Label("Vælg tilkøb");
+        pane.add(lbltilkøb,1,0);
+        lvwGetTilkøb.getItems().addAll(Controller.getAllTilkøb());
+        pane.add(lvwGetTilkøb,1,1);
+        lvwGetTilkøb.setMaxHeight(200);
 
         pane.setPadding(new Insets(10));
         pane.setHgap(10);
@@ -271,7 +301,27 @@ public class Gui extends Application {
         pane.add(btnOpretDeltager2,0,7);
         btnOpretDeltager2.setOnAction((Event -> opretDeltager()));
     }
+
+    private void initContentUdflugt(GridPane pane){
+        Label lblNavnPåUdflugt = new Label("Navn");
+        pane.add(lblNavnPåUdflugt,0,1);
+        HBox hbox1 = new HBox();
+        hbox1.getChildren().addAll(lblNavnPåUdflugt, txfUdflugtNavn);
+        hbox1.setSpacing(10);
+        pane.add(hbox1,0,1);
+
+        lvwKonfListe.getItems().addAll(Controller.getKonferencer());
+        pane.add(lvwKonfListe,1,1);
+
+        pane.setPadding(new Insets(10));
+        pane.setHgap(10);
+        pane.setVgap(10);
+
+        pane.add(btnOpretUdflugt2,0,2);
+        btnOpretUdflugt2.setOnAction(Event -> opretUdflugtMetode());
+    }
     private void opretKonference(){
+
         DateTimeFormatter dateFormat =  DateTimeFormatter.ofPattern("dd/M/yyyy");
         LocalDate date = LocalDate.parse(txfStartDato.getText(),dateFormat);
         int periode = Integer.parseInt(txfPeriode.getText());
@@ -290,6 +340,7 @@ public class Gui extends Application {
         Hotel hotel = Controller.createHotel(txfHotelNavn.getText());
         lvwHoteller.getItems().add(hotel);
 
+        /*
         if (wifi.isSelected()){
             Controller.createTilkøb(hotel,"wifi",50);
         }
@@ -299,6 +350,8 @@ public class Gui extends Application {
         if(andet.isSelected()){
             Controller.createTilkøb(hotel,"Andet", 150);
         }
+
+         */
         txfHotelNavn.clear();
         opretHotelStage.hide();
         wifi.setSelected(false);
@@ -324,5 +377,12 @@ public class Gui extends Application {
         }else{
             txfLedsagerNavn.setDisable(false);
         }
+    }
+    private void opretUdflugtMetode(){
+        LocalDate dato = lvwKonfListe.getSelectionModel().getSelectedItem().getStartDato();
+        Controller.createUdflugt(lvwKonfListe.getSelectionModel().getSelectedItem(), txfUdflugtNavn.getText(),dato,69);
+
+        txfUdflugtNavn.clear();
+        opretUdlugtStage.hide();
     }
 }
