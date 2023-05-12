@@ -73,7 +73,8 @@ public abstract class Controller {
             for (TilKøb tilKøb : ophold.getTilKøb())
                 samletPris += tilKøb.getPris();
 
-            for (UdFlugt udFlugt : ophold.getDeltager().get)
+            for (UdFlugt udFlugt : tilmeld.getLedsager().getUdFlugter())
+                samletPris += udFlugt.getPris();
         }
 
         return samletPris;
