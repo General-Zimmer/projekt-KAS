@@ -11,7 +11,19 @@ public abstract class Storage {
     private static final ArrayList<Hotel> hoteler = new ArrayList<>();
     private static final ArrayList<Person> personer = new ArrayList<>();
     private static final ArrayList<UdFlugt> udflugter = new ArrayList<>();
-    public static final ArrayList<TilKøb> tilKøbene = new ArrayList<>();
+    private static final ArrayList<TilKøb> tilKøbene = new ArrayList<>();
+    private static final ArrayList<Tilmeld> tilmeldene = new ArrayList<>();
+
+
+    public static Tilmeld addtilmeld(Tilmeld tilmeld) {
+        tilmeldene.add(tilmeld);
+        return tilmeld;
+    }
+
+    public static ArrayList<Tilmeld> gettilmeldene() {
+        return new ArrayList<>(tilmeldene);
+    }
+
 
     public static TilKøb addTilkøb(TilKøb tilKøb) {
         tilKøbene.add(tilKøb);

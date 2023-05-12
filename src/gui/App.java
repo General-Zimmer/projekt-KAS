@@ -31,9 +31,18 @@ public class App {
         Controller.createTilkøb(paradise,"Danskvand", 20);
         Controller.createTilkøb(paradise,"Risk of Rain 2", 100);
 
-        Controller.createDeltager("Bob Swanson", "88888888"," ");
+        Controller.createDeltager("Bob Swanson", "88888888");
         Controller.createDeltager("Scarlet Johanson", "12345678", "Marvel");
         Controller.createDeltager("Big Dick Zimmer", "09127623", "WiseCraft");
 
+        Controller.createDeltager("Finn Madsen", "yetegr");
+        Controller.createDeltager("Niels Petersen", "rterse");
+        Controller.createDeltager("Ulla Hansen", "trgsr");
+        Controller.createDeltager("Peter Sommer", "efarf");
+        Controller.createDeltager("Lone Jensen", "grgss");
+
+        //--------------------Hoteller-------------------
+        Hotel svane = Controller.createHotel("Den hvide svane");
+        Controller.createTilkøb(svane, "Mad", 50);
     }
 }

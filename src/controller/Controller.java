@@ -35,7 +35,12 @@ public abstract class Controller {
     }
 
     public static Deltager createDeltager(String name, String telefon, String firma) {
+
         return (Deltager) Storage.addPerson(new Deltager(name, telefon, firma));
+    }
+
+    public static Deltager createDeltager(String name, String telefon) {
+        return (Deltager) Storage.addPerson(new Deltager(name, telefon));
     }
 
     public static Ledsager createLedsager(String name, String telefon, Deltager deltager) {
@@ -47,12 +52,27 @@ public abstract class Controller {
         return Storage.addUdflugt(new UdFlugt(konference, navn, dato, pris));
     }
 
+    /*
+    public static Tilmeld createTilmeld(Konference konference, boolean erForedragsholder, LocalDate startDato, int periode, Deltager deltager, Ledsager ledsager) {
+        Storage.addtilmeld(new Tilmeld(konference, erForedragsholder, startDato, periode, deltager, ledsager));
+    }
+
+     */
+
+    /**
+     *
+     * @return
+     */
     public static TilKøb createTilkøb(Hotel hotel, String navn, double pris) {
         TilKøb tilKøb = new TilKøb(navn, pris);
         hotel.addTilkøb(tilKøb);
         return Storage.addTilkøb(tilKøb);
     }
 
+    /**
+     *
+     * @return every deltager
+     */
     public static ArrayList<Deltager> getDeltagere() {
         ArrayList<Deltager> deltagers= new ArrayList<>();
         for (Person person : Storage.getPersoner())
@@ -60,6 +80,11 @@ public abstract class Controller {
                 deltagers.add(deltager);
         return deltagers;
     }
+
+    /**
+     *
+     * @return every Ledsager
+     */
     public static ArrayList<Ledsager> getLedsager() {
         ArrayList<Ledsager> ledsagere = new ArrayList<>();
         for (Person person : Storage.getPersoner())
@@ -68,19 +93,33 @@ public abstract class Controller {
         return ledsagere;
     }
 
-
+    /**
+     * @return every Hotel
+     */
     public static ArrayList<Hotel> getHoteller() {
         return Storage.getHoteler();
     }
 
+    /**
+     *
+     * @return every konference
+     */
     public static ArrayList<Konference> getKonferencer() {
         return Storage.getKonferencer();
     }
 
+    /**
+     *
+     * @return every tilkøb
+     */
     public static ArrayList<TilKøb> getAllTilkøb() {
         return Storage.getTilkøb();
     }
 
+    /**
+     *
+     * @return all tilkøb from Hotel
+     */
     public static ArrayList<TilKøb> getTilkøb(Hotel hotel) {
         return hotel.getTilkøb();
     }
@@ -88,6 +127,7 @@ public abstract class Controller {
     /**
      *
      * Creates Hotel
+     * @return Hotel created
      */
     public static Hotel createHotel(String name) {
         return Storage.addHoteler(new Hotel(name));
@@ -95,6 +135,7 @@ public abstract class Controller {
 
     /**
      * Create a konference
+     * @return created konference
      */
     public static Konference createKonference(String name, String sted, LocalDate startDate, int periode, float dayPrice) {
         return Storage.addKonference(new Konference(name, sted, startDate, periode, dayPrice));
