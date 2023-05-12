@@ -8,17 +8,19 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import model.Deltager;
-import model.Hotel;
-import model.Konference;
-import model.Person;
+import model.*;
 import storage.Storage;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Gui extends Application {
 
     private final ListView<Hotel> lvwHoteller = new ListView<>();
     private final ListView<Konference> lvwKonfListe = new ListView<>();
     private final ListView<Person> lvwPersoner = new ListView<>();
+    private final ListView<TilKøb> lvwGetTilkøb = new ListView<>();
+    private final ComboBox<Hotel> cbbHotel = new ComboBox<>();
     private final Button btnOpretKonf = new Button("Opret Konference");
     private final TextField txfStartDato = new TextField();
     private final TextField txfPeriode = new TextField();
@@ -42,6 +44,7 @@ public class Gui extends Application {
     private final CheckBox andet = new CheckBox("Andet");
     CheckBox cbShowLedsager = new CheckBox("Tilføj ledsager?");
     private final TextField txfFirma = new TextField();
+    private final TextField txfPlacering = new TextField();
 
 
     @Override
@@ -58,6 +61,8 @@ public class Gui extends Application {
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
+
+
     }
 
 
@@ -182,14 +187,19 @@ public class Gui extends Application {
         hbox4.getChildren().addAll(lblPris, txfPrisPrDag);
         pane.add(hbox4,0,5);
         hbox4.setSpacing(12);
+        Label lblPlacering = new Label("Placering:");
+        HBox hbox5 = new HBox();
+        hbox5.getChildren().addAll(lblPlacering,txfPlacering);
+        hbox5.setSpacing(10);
+        pane.add(hbox5,0,6);
+
 
         pane.setPadding(new Insets(10));
         pane.setHgap(10);
         pane.setVgap(10);
-        pane.add(btnOpretKonferencen,0,6);
+        pane.add(btnOpretKonferencen,0,7);
 
         btnOpretKonferencen.setOnAction(Event -> opretKonference());
-
 
     }
     public void initContentCreateHotel(GridPane pane){
@@ -262,6 +272,13 @@ public class Gui extends Application {
         btnOpretDeltager2.setOnAction((Event -> opretDeltager()));
     }
     private void opretKonference(){
+        DateTimeFormatter dateFormat =  DateTimeFormatter.ofPattern("dd/M/yyyy");
+        LocalDate date = LocalDate.parse(txfStartDato.getText(),dateFormat);
+        int periode = Integer.parseInt(txfPeriode.getText());
+        float prisPerDag = Float.parseFloat(txfPrisPrDag.getText());
+
+        Konference konference = Controller.createKonference(txfKonfNavn.getText(),txfPlacering.getText(),date,periode,prisPerDag);
+        lvwKonfListe.getItems().add(konference);
 
         txfStartDato.clear();
         txfPeriode.clear();

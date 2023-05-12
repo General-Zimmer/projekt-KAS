@@ -76,4 +76,14 @@ public class Konference {
     public void setPrisPerDag(float prisPerDag) {
         this.prisPerDag = prisPerDag;
     }
+
+    @Override
+    public String toString() {
+        return
+                "navn: " + navn +
+                " sted: " + sted  +
+                " startDato: " + startDato +
+                " varighedDage: " + varighedDage +
+                " prisPerDag: " + prisPerDag;
+    }
 }
