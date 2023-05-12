@@ -35,8 +35,9 @@ public abstract class Storage {
         return new ArrayList<>(konferencer);
     }
 
-    public static void addKonference(Konference konferencer) {
+    public static Konference addKonference(Konference konferencer) {
         Storage.konferencer.add(konferencer);
+        return konferencer;
     }
 
     public static ArrayList<Hotel> getHoteler() {

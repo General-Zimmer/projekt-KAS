@@ -9,25 +9,22 @@ import java.util.ArrayList;
 @SuppressWarnings("unused")
 public abstract class Controller {
 
-    /**
-     * Create a konference
-     */
-    public static Konference createKonference(String name, String sted, LocalDate startDate, int periode, float dayPrice) {
-        Konference konference = new Konference(name, sted, startDate, periode, dayPrice);
+    public static double getSamletPris(Tilmeld tilmeld) {
+        double samletPris = tilmeld.getKonference().getPrisPerDag()*tilmeld.getKonference().getVarighedDage();
+        for (Ophold ophold : tilmeld.getOphold()) {
+            HotelAftale aftale = ophold.getHotelAftale();
+            samletPris += ophold.getPeriode()*(aftale.getPrisDagEnkelt()+aftale.getPrisDagDobbelt());
 
-        Storage.addKonference(konference);
-        return konference;
+            for (TilKøb tilKøb : ophold.getTilKøb())
+                samletPris += tilKøb.getPris();
+
+            for (UdFlugt udFlugt : tilmeld.getLedsager().getUdFlugter())
+                samletPris += udFlugt.getPris();
+        }
+
+        return samletPris;
     }
 
-    /**
-     *
-     * Creates Hotel
-     */
-    public static Hotel createHotel(String name) {
-        Hotel hotel = new Hotel(name);
-        Storage.addHoteler(hotel);
-        return hotel;
-    }
 
     /**
      *
@@ -56,6 +53,22 @@ public abstract class Controller {
         return Storage.addTilkøb(tilKøb);
     }
 
+    public static ArrayList<Deltager> getDeltagere() {
+        ArrayList<Deltager> deltagers= new ArrayList<>();
+        for (Person person : Storage.getPersoner())
+            if (person instanceof Deltager deltager)
+                deltagers.add(deltager);
+        return deltagers;
+    }
+    public static ArrayList<Ledsager> getLedsager() {
+        ArrayList<Ledsager> ledsagere = new ArrayList<>();
+        for (Person person : Storage.getPersoner())
+            if (person instanceof Ledsager ledsager)
+                ledsagere.add(ledsager);
+        return ledsagere;
+    }
+
+
     public static ArrayList<Hotel> getHoteller() {
         return Storage.getHoteler();
     }
@@ -72,19 +85,19 @@ public abstract class Controller {
         return hotel.getTilkøb();
     }
 
-    public static double getSamletPris(Tilmeld tilmeld) {
-        double samletPris = tilmeld.getKonference().getPrisPerDag()*tilmeld.getKonference().getVarighedDage();
-        for (Ophold ophold : tilmeld.getOphold()) {
-            HotelAftale aftale = ophold.getHotelAftale();
-            samletPris += ophold.getPeriode()*(aftale.getPrisDagEnkelt()+aftale.getPrisDagDobbelt());
-
-            for (TilKøb tilKøb : ophold.getTilKøb())
-                samletPris += tilKøb.getPris();
-
-            for (UdFlugt udFlugt : tilmeld.getLedsager().getUdFlugter())
-                samletPris += udFlugt.getPris();
-        }
-
-        return samletPris;
+    /**
+     *
+     * Creates Hotel
+     */
+    public static Hotel createHotel(String name) {
+        return Storage.addHoteler(new Hotel(name));
     }
+
+    /**
+     * Create a konference
+     */
+    public static Konference createKonference(String name, String sted, LocalDate startDate, int periode, float dayPrice) {
+        return Storage.addKonference(new Konference(name, sted, startDate, periode, dayPrice));
+    }
+
 }
