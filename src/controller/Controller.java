@@ -6,8 +6,6 @@ import storage.Storage;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import static storage.Storage.hoteler;
-
 @SuppressWarnings("unused")
 public abstract class Controller {
 
