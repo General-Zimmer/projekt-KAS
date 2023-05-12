@@ -4,6 +4,9 @@ import model.*;
 import storage.Storage;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+
+import static storage.Storage.hoteler;
 
 @SuppressWarnings("unused")
 public abstract class Controller {
@@ -40,5 +43,18 @@ public abstract class Controller {
 
     public static void createTilkøb(Hotel hotel, String navn, double pris) {
         hotel.addTilkøb(new TilKøb(navn, pris));
+    }
+
+    public static ArrayList<TilKøb> getAllTilkøb() {
+        ArrayList<Hotel> hoteler = Storage.getHoteler();
+        for (Hotel hotel : hoteler)
+            for (TilKøb tilKøb : hotel.getTilkøb()) {
+
+            }
+        return null;
+    }
+
+    public static ArrayList<TilKøb> getTilkøb(Hotel hotel) {
+        return hotel.getTilkøb();
     }
 }

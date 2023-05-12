@@ -17,6 +17,9 @@ public class Deltager extends Person{
         super(name, telefon);
     }
 
+    
+
+
     public void addTilmeldelse(Tilmeld tilmeldelse) {
         tilmeldelser.add(tilmeldelse);
     }
