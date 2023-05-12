@@ -25,4 +25,11 @@ public class TilKøb {
     public void setPris(double pris) {
         this.pris = pris;
     }
+
+    @Override
+    public String toString() {
+        return "Tilkøb: " +
+                navn + " og " +
+                " pris: " + pris;
+    }
 }

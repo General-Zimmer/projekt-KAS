@@ -17,8 +17,12 @@ public class Deltager extends Person{
         super(name, telefon);
     }
 
-    
-
+    public String getNavn() {
+        return super.getName();
+    }
+    public String getTelefon(){
+        return super.getTelefon();
+    }
 
     public void addTilmeldelse(Tilmeld tilmeldelse) {
         tilmeldelser.add(tilmeldelse);
@@ -33,5 +37,11 @@ public class Deltager extends Person{
 
     public void setFirma(String firma) {
         this.firma = firma;
+    }
+
+    @Override
+    public String toString() {
+        return "Navn: " + getNavn() + " tlf: " + getTelefon() +
+                " Firma: " + firma;
     }
 }

@@ -27,4 +27,16 @@ public class Hotel {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+
+        builder.append(name).append(" ");
+
+        for (TilKøb tilKøb : tilkøb)
+            builder.append(tilKøb.toString()).append(" ");
+
+        return builder.toString();
+    }
 }

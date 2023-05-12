@@ -1,22 +1,24 @@
 package gui;
 
+import controller.Controller;
 import javafx.application.Application;
-import javafx.event.Event;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import model.Deltager;
 import model.Hotel;
 import model.Konference;
 import model.Person;
+import storage.Storage;
 
 public class Gui extends Application {
 
     private final ListView<Hotel> lvwHoteller = new ListView<>();
     private final ListView<Konference> lvwKonfListe = new ListView<>();
-    private final ListView<Person> lvwPersoner = new ListView<Person>();
+    private final ListView<Person> lvwPersoner = new ListView<>();
     private final Button btnOpretKonf = new Button("Opret Konference");
     private final TextField txfStartDato = new TextField();
     private final TextField txfPeriode = new TextField();
@@ -26,7 +28,6 @@ public class Gui extends Application {
     private final Button btnOpretHotel = new Button("Opret hotel");
     private final Button btnOpretDeltager = new Button("Opret Deltager");
     private final TextField txfHotelNavn = new TextField();
-    private final TextField txfPlacering = new TextField();
     private final Button btnOpretHotel2 = new Button("Opret Hotel");
     private Stage opretPersonStage;
     private Stage opretKonStage;
@@ -40,6 +41,7 @@ public class Gui extends Application {
     private final CheckBox morgenmad = new CheckBox("Morgenmad");
     private final CheckBox andet = new CheckBox("Andet");
     CheckBox cbShowLedsager = new CheckBox("Tilføj ledsager?");
+    private final TextField txfFirma = new TextField();
 
 
     @Override
@@ -186,7 +188,7 @@ public class Gui extends Application {
         pane.setVgap(10);
         pane.add(btnOpretKonferencen,0,6);
 
-        btnOpretKonferencen.setOnAction(Event -> clearAndHide());
+        btnOpretKonferencen.setOnAction(Event -> opretKonference());
 
 
     }
@@ -194,9 +196,6 @@ public class Gui extends Application {
         Label hotelNavn = new Label("Hotel Navn");
         pane.add(hotelNavn,0,2);
         pane.add(txfHotelNavn,1,2);
-        Label hotelPlacering = new Label("Placering");
-        pane.add(hotelPlacering,0,3);
-        pane.add(txfPlacering,1,3);
 
 
         HBox hbox1 = new HBox();
@@ -204,23 +203,21 @@ public class Gui extends Application {
         hbox1.setSpacing(22);
         pane.add(hbox1,0,2);
         HBox hBox2 = new HBox();
-        hBox2.getChildren().addAll(hotelPlacering, txfPlacering);
-        hBox2.setSpacing(33);
-        pane.add(hBox2,0,3);
 
 
         HBox hbox3 = new HBox();
         hbox3.getChildren().addAll(wifi,morgenmad,andet);
-        pane.add(hbox3,0,5);
+        hbox3.setSpacing(15);
+        pane.add(hbox3,0,4);
 
 
         pane.setPadding(new Insets(10));
         pane.setHgap(10);
         pane.setVgap(10);
-        pane.add(btnOpretHotel2,0,6);
+        pane.add(btnOpretHotel2,0,5);
 
         opretHotelStage.setAlwaysOnTop(true);
-        btnOpretHotel2.setOnAction(Event -> clearAndHideHotel());
+        btnOpretHotel2.setOnAction(Event -> opretHotel());
     }
 
     public void initcontentDeltager(GridPane pane){
@@ -245,37 +242,60 @@ public class Gui extends Application {
         pane.setVgap(10);
         opretPersonStage.setAlwaysOnTop(true);
 
+        Label lblFirma = new Label("Firma:");
+        HBox hBox4 = new HBox();
+        hBox4.getChildren().addAll(lblFirma,txfFirma);
+        hBox4.setSpacing(75);
+        pane.add(hBox4,0,4);
+
         cbShowLedsager.setOnAction(Event -> enableLedsager());
 
         txfLedsagerNavn.setDisable(true);
-        pane.add(cbShowLedsager,0,4);
+        pane.add(cbShowLedsager,0,5);
         Label lblledsager = new Label("Ledsager navn:");
         HBox hbox3 = new HBox();
         hbox3.getChildren().addAll(lblledsager, txfLedsagerNavn);
         hbox3.setSpacing(25);
-        pane.add(hbox3, 0, 5);
+        pane.add(hbox3, 0, 6);
 
-        pane.add(btnOpretDeltager2,0,6);
-        btnOpretDeltager2.setOnAction((Event -> clearAndHideDeltager()));
+        pane.add(btnOpretDeltager2,0,7);
+        btnOpretDeltager2.setOnAction((Event -> opretDeltager()));
     }
-    private void clearAndHide(){
+    private void opretKonference(){
+
         txfStartDato.clear();
         txfPeriode.clear();
         txfKonfNavn.clear();
         txfPrisPrDag.clear();
         opretKonStage.hide();
     }
-    private void clearAndHideHotel(){
+    private void opretHotel(){
+        Hotel hotel = Controller.createHotel(txfHotelNavn.getText());
+        lvwHoteller.getItems().add(hotel);
+
+        if (wifi.isSelected()){
+            Controller.createTilkøb(hotel,"wifi",50);
+        }
+        if(morgenmad.isSelected()){
+            Controller.createTilkøb(hotel,"Morgenmad", 100);
+        }
+        if(andet.isSelected()){
+            Controller.createTilkøb(hotel,"Andet", 150);
+        }
         txfHotelNavn.clear();
-        txfPlacering.clear();
         opretHotelStage.hide();
         wifi.setSelected(false);
         morgenmad.setSelected(false);
         andet.setSelected(false);
     }
-    private void clearAndHideDeltager(){
+    private void opretDeltager(){
+        Deltager deltager = Controller.createDeltager(txfDeltagerNavn.getText(),txftlf.getText(),txfFirma.getText());
+        Storage.addPerson(deltager);
+        lvwPersoner.getItems().add(deltager);
+
         txfDeltagerNavn.clear();
         txftlf.clear();
+        txfFirma.clear();
         opretPersonStage.hide();
     }
 
