@@ -56,6 +56,14 @@ public abstract class Controller {
         return Storage.addTilkøb(tilKøb);
     }
 
+    public static ArrayList<Hotel> getHoteller() {
+        return Storage.getHoteler();
+    }
+
+    public static ArrayList<Konference> getKonferencer() {
+        return Storage.getKonferencer();
+    }
+
     public static ArrayList<TilKøb> getAllTilkøb() {
         return Storage.getTilkøb();
     }
