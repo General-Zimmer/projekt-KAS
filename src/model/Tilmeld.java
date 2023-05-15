@@ -37,6 +37,18 @@ public class Tilmeld {
         return erForedragsholder;
     }
 
+    @Override
+    public String toString() {
+        return
+                "konference: " + konference +
+                " erForedragsholder: " + erForedragsholder +
+                " startDato: " + startDato +
+                " periode: " + periode +
+                " deltager: " + deltager +
+                " ledsager: " + ledsager +
+                " ophold: " + ophold;
+    }
+
     public void setErForedragsholder(boolean erForedragsholder) {
         this.erForedragsholder = erForedragsholder;
     }
