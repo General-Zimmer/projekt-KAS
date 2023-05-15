@@ -34,9 +34,8 @@ public abstract class Controller {
      * Creates a tilmelding
      * Note: Can give runtime exceptions. You can find out which error triggered it by the message in the
      * runtime exception. Check code to figure out the exact message given.
-     *
-     * <p>
-     * @return the created Tilmeld
+     * @param ledsager can be null
+     * @return the created tilmelding
      */
     public static Tilmeld createTilmeld(Konference konference, boolean erForedragsholder, LocalDate startDato, int periode, Deltager deltager, Ledsager ledsager) {
         LocalDate konStart = konference.getStartDato();
