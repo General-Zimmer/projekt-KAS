@@ -50,6 +50,7 @@ public abstract class Controller {
      * @return the created Ophold
      */
     public static Ophold createOphold(Tilmeld tilmeld, HotelAftale hotelAftale, Deltager deltager, LocalDate startDato, int periode) {
+
         Ophold ophold = new Ophold(hotelAftale, deltager, startDato, periode);
         tilmeld.addOphold(ophold);
         return ophold;
@@ -135,6 +136,20 @@ public abstract class Controller {
      */
     public static ArrayList<Hotel> getHoteller() {
         return Storage.getHoteler();
+    }
+    /**
+     * @return every Hotel
+     */
+    public static ArrayList<Hotel> getHoteller(Konference konference) {
+        ArrayList<Hotel> hoteller = new ArrayList<>();
+
+        for (HotelAftale hotelAftale : konference.getHotelAftaler()) {
+            Hotel hotel = hotelAftale.getHotel();
+
+            if (!hoteller.contains(hotel))
+                hoteller.add(hotelAftale.getHotel());
+        }
+        return hoteller;
     }
 
     /**

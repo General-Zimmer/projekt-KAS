@@ -15,9 +15,9 @@ public class App {
 
     public static void initStorage(){
         //-------------------Hav og himmel--------------
-        LocalDate startDate = LocalDate.of(2023,8, 1);
+        LocalDate startDate = LocalDate.of(2021, 12, 18);
 
-        Konference hav = Controller.createKonference("Hav og Himmel", "Odense Uni", startDate, 10, 1500);
+        Konference hav = Controller.createKonference("Hav og Himmel", "Odense Uni", startDate, 3, 1500);
 
         //--------------------Deltagere-------------------
 
@@ -26,26 +26,38 @@ public class App {
         Controller.createDeltager("Big Dick Zimmer", "09127623", "WiseCraft");
 
         Deltager finn = Controller.createDeltager("Finn Madsen", "yetegr");
-        Controller.createDeltager("Niels Petersen", "rterse");
-        Controller.createDeltager("Ulla Hansen", "trgsr");
-        Controller.createDeltager("Peter Sommer", "efarf");
-        Controller.createDeltager("Lone Jensen", "grgss");
+        Deltager niels = Controller.createDeltager("Niels Petersen", "rterse");
+        Deltager ulla = Controller.createDeltager("Ulla Hansen", "trgsr");
+        Deltager peter = Controller.createDeltager("Peter Sommer", "efarf");
+        Deltager lone = Controller.createDeltager("Lone Jensen", "grgss");
 
-        Ledsager mads = Controller.createLedsager("Mads Madsen", "6433578", finn);
-        //--------------------Smol test-------------------
+        //--------------------Ledsager-------------------
 
-        LocalDate tilmeldStart = LocalDate.of(2023,8, 2);
+        Ledsager mads = Controller.createLedsager("Hans Hansen", "6433578", ulla);
+        Ledsager mie = Controller.createLedsager("Mie Sommer", "6433578", peter);
+        Ledsager jan = Controller.createLedsager("Jan Madsen", "6433578", lone  );
 
-        Tilmeld madsTil = Controller.createTilmeld(hav, false, tilmeldStart, 3, finn, mads);
-        System.out.println("Mads som normal deltager");
-        System.out.println(Controller.getSamletPris(madsTil));
-        System.out.println("Mads som fordragsholder");
-        madsTil.setErForedragsholder(true);
-        System.out.println(Controller.getSamletPris(madsTil));
+        //--------------------Udflugter-------------------
+
+        UdFlugt odense = Controller.createUdflugt(hav, "Byrundtur, Odense", startDate, 125);
+        UdFlugt ege = Controller.createUdflugt(hav, "Egeskov", startDate, 75);
+        UdFlugt trap = Controller.createUdflugt(hav, "Trapholt Museum, Kolding", startDate, 200);
+
+
+
+        //--------------------Tilmeldinger-------------------
+
+        Tilmeld finTil = Controller.createTilmeld(hav, false, startDate, 3, finn, null);
+        Tilmeld NielsTil = Controller.createTilmeld(hav, false, startDate, 3, niels, null);
+        Tilmeld ullsaTil = Controller.createTilmeld(hav, false, startDate, 2, ulla, mads);
+        Tilmeld peterTil = Controller.createTilmeld(hav, false, startDate, 3, peter, mie);
+        Tilmeld loneTil = Controller.createTilmeld(hav, true, startDate, 3, lone, jan);
+
+
 
         //--------------------Hoteller-------------------
         Hotel svane = Controller.createHotel("Den hvide svane");
-        Controller.createTilkøb(svane, "Mad", 50);
+        Controller.createTilkøb(svane, "Wifi", 50);
 
         Hotel paradise = Controller.createHotel("Paradise");
         Controller.createTilkøb(paradise,"Wii tank", 50);
@@ -56,24 +68,14 @@ public class App {
         Controller.createTilkøb(paradise,"Risk of Rain 2", 100);
 
         //--------------------Ophold-------------------
-        HotelAftale doubleBed = Controller.createHotelAftale(0, 700, svane, hav);
-        HotelAftale singleBed = Controller.createHotelAftale(100, 0, paradise, hav);
+        HotelAftale doubleBed = Controller.createHotelAftale(0, 1250, svane, hav);
+        HotelAftale singleBed = Controller.createHotelAftale(1050, 0, svane, hav);
 
-        Ophold fOphold = Controller.createOphold(madsTil, singleBed, finn, tilmeldStart, 3);
-
-
-        for (TilKøb tilKøb : fOphold.getHotelAftale().getHotel().getTilkøb()) {
-            fOphold.addTilkøb(tilKøb);
-        }
-
-        System.out.println("\npris test med ophold\n");
-
-        System.out.println("Mads som normal deltager");
-        madsTil.setErForedragsholder(false);
-        System.out.println(Controller.getSamletPris(madsTil));
-        System.out.println("Mads som fordragsholder");
-        madsTil.setErForedragsholder(true);
-        System.out.println(Controller.getSamletPris(madsTil));
+        Ophold fOphold = Controller.createOphold(finTil, singleBed, finn, startDate, 3);
+        Ophold nOphold = Controller.createOphold(NielsTil, singleBed, niels, startDate, 3);
+        Ophold uOphold = Controller.createOphold(ullsaTil, doubleBed, ulla, startDate, 2);
+        Ophold pOphold = Controller.createOphold(peterTil, doubleBed, peter, startDate, 3);
+        Ophold lOphold = Controller.createOphold(loneTil, doubleBed, lone, startDate, 3);
 
 
     }

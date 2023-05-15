@@ -37,6 +37,10 @@ public class Konference {
         return new ArrayList<>(udFlugter);
     }
 
+    public ArrayList<HotelAftale> getHotelAftaler() {
+        return new ArrayList<>(hotelAftaler);
+    }
+
     public LocalDate getSlutDato() {
         return startDato.plusDays(varighedDage);
     }
