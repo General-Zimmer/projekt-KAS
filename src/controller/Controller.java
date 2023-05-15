@@ -60,7 +60,9 @@ public abstract class Controller {
      * @return the created HotelAftale
      */
     public static HotelAftale createHotelAftale(int prisDagEnkelt, int prisDagDobbelt, Hotel hotel, Konference konference) {
-        return new HotelAftale(prisDagEnkelt, prisDagDobbelt, hotel, konference);
+        HotelAftale hotelAftale = new HotelAftale(prisDagEnkelt, prisDagDobbelt, hotel, konference);
+        konference.addHotelAftale(hotelAftale);
+        return hotelAftale;
     }
     /**
      * @return the created Deltager with firma

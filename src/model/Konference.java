@@ -37,6 +37,9 @@ public class Konference {
         return new ArrayList<>(udFlugter);
     }
 
+    public void addHotelAftale(HotelAftale hotelAftale) {
+        hotelAftaler.add(hotelAftale);
+    }
     public ArrayList<HotelAftale> getHotelAftaler() {
         return new ArrayList<>(hotelAftaler);
     }
