@@ -34,7 +34,7 @@ public class App {
 
         //--------------------Ledsager-------------------
 
-        Ledsager mads = Controller.createLedsager("Hans Hansen", "6433578", ulla);
+        Ledsager hans = Controller.createLedsager("Hans Hansen", "6433578", ulla);
         Ledsager mie = Controller.createLedsager("Mie Sommer", "6433578", peter);
         Ledsager jan = Controller.createLedsager("Jan Madsen", "6433578", lone  );
 
@@ -44,14 +44,17 @@ public class App {
         UdFlugt ege = Controller.createUdflugt(hav, "Egeskov", startDate, 75);
         UdFlugt trap = Controller.createUdflugt(hav, "Trapholt Museum, Kolding", startDate, 200);
 
-
-
+        hans.addUdFlugt(odense);
+        mie.addUdFlugt(ege);
+        mie.addUdFlugt(trap);
+        jan.addUdFlugt(ege);
+        jan.addUdFlugt(odense);
 
         //--------------------Tilmeldinger-------------------
 
         Tilmeld finTil = Controller.createTilmeld(hav, false, startDate, 3, finn, null);
         Tilmeld NielsTil = Controller.createTilmeld(hav, false, startDate, 3, niels, null);
-        Tilmeld ullsaTil = Controller.createTilmeld(hav, false, startDate, 2, ulla, mads);
+        Tilmeld ullsaTil = Controller.createTilmeld(hav, false, startDate, 2, ulla, hans);
         Tilmeld peterTil = Controller.createTilmeld(hav, false, startDate, 3, peter, mie);
         Tilmeld loneTil = Controller.createTilmeld(hav, true, startDate, 3, lone, jan);
 
@@ -78,6 +81,17 @@ public class App {
         Ophold uOphold = Controller.createOphold(ullsaTil, doubleBed, ulla, startDate, 2);
         Ophold pOphold = Controller.createOphold(peterTil, doubleBed, peter, startDate, 3);
         Ophold lOphold = Controller.createOphold(loneTil, doubleBed, lone, startDate, 3);
+
+
+        System.out.println("priser for tilmeldinger\n");
+
+        System.out.println("Finn: " + Controller.getSamletPris(finTil));
+        System.out.println("Niels: " + Controller.getSamletPris(NielsTil));
+        System.out.println("Ulla: " + Controller.getSamletPris(ullsaTil));
+        System.out.println("Peter: " + Controller.getSamletPris(peterTil));
+        System.out.println("Lone: " + Controller.getSamletPris(loneTil));
+
+
 
 
     }

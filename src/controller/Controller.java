@@ -21,8 +21,10 @@ public abstract class Controller {
             for (TilKøb tilKøb : ophold.getTilKøb())
                 samletPris += tilKøb.getPris();
 
-            for (UdFlugt udFlugt : tilmeld.getLedsager().getUdFlugter())
-                samletPris += udFlugt.getPris();
+            Ledsager ledsager = tilmeld.getLedsager();
+            if (ledsager != null)
+                for (UdFlugt udFlugt : ledsager.getUdFlugter())
+                    samletPris += udFlugt.getPris();
         }
 
         return samletPris;
