@@ -2,7 +2,7 @@ package model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-
+// metoderne til oversigter over tilmeldelser og udflugter kan være her i
 @SuppressWarnings("unused")
 public class Konference {
     private String navn;
@@ -31,6 +31,10 @@ public class Konference {
 
     public ArrayList<Person> getPersoner() {
         return new ArrayList<>(personer);
+    }
+
+    public ArrayList<UdFlugt> getUdflugter() {
+        return new ArrayList<>(udFlugter);
     }
 
     public LocalDate getSlutDato() {

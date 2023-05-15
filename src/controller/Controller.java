@@ -5,15 +5,12 @@ import storage.Storage;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Locale;
 
-@SuppressWarnings("unused")
 public abstract class Controller {
 
     /**
-     *
-     * @param tilmeld
-     * @return
+     * Calculates the total cost of a ticket
+     * @return the total cost of a ticket.
      */
     public static double getSamletPris(Tilmeld tilmeld) {
         double samletPris = !tilmeld.isErForedragsholder() ? tilmeld.getKonference().getPrisPerDag()*tilmeld.getPeriode() : 0;
@@ -32,7 +29,11 @@ public abstract class Controller {
     }
 
     /**
+     * Creates a tilmelding
+     * Note: Can give runtime exceptions. You can find out which error triggered it by the message in the
+     * runtime exception. Check code to figure out the exact message given.
      *
+     * <p>
      * @return the created Tilmeld
      */
     public static Tilmeld createTilmeld(Konference konference, boolean erForedragsholder, LocalDate startDato, int periode, Deltager deltager, Ledsager ledsager) {
@@ -42,10 +43,12 @@ public abstract class Controller {
         if ((konStart.isAfter(startDato) && konSlut.isBefore(startDato)))
             throw new RuntimeException("Cannot create Tilmeldelse");
 
-
         return Storage.addtilmeld(new Tilmeld(konference, erForedragsholder, startDato, periode, deltager, ledsager));
     }
 
+    /**
+     * @return the created Ophold
+     */
     public static Ophold createOphold(Tilmeld tilmeld, HotelAftale hotelAftale, Deltager deltager, LocalDate startDato, int periode) {
         Ophold ophold = new Ophold(hotelAftale, deltager, startDato, periode);
         tilmeld.addOphold(ophold);
@@ -53,27 +56,41 @@ public abstract class Controller {
     }
 
     /**
-     *
-     *
+     * @return the created HotelAftale
      */
-    public static HotelAftale createHotelAftale(int prisDagEnkelt, int prisDagDobbelt, Hotel hotel) {
-        return new HotelAftale(prisDagEnkelt, prisDagDobbelt, hotel);
+    public static HotelAftale createHotelAftale(int prisDagEnkelt, int prisDagDobbelt, Hotel hotel, Konference konference) {
+        return new HotelAftale(prisDagEnkelt, prisDagDobbelt, hotel, konference);
     }
-
+    /**
+     * @return the created Deltager with firma
+     */
     public static Deltager createDeltager(String name, String telefon, String firma) {
 
         return (Deltager) Storage.addPerson(new Deltager(name, telefon, firma));
     }
 
+    /**
+     * @return the created Deltager without firma
+     */
     public static Deltager createDeltager(String name, String telefon) {
         return (Deltager) Storage.addPerson(new Deltager(name, telefon));
     }
 
+    public static ArrayList<UdFlugt> getUdflugter(Konference konference) {
+        return konference.getUdflugter();
+    }
+
+    /**
+     * @return the created Ledsager
+     */
     public static Ledsager createLedsager(String name, String telefon, Deltager deltager) {
         return (Ledsager) Storage.addPerson(new Ledsager(name, telefon, deltager));
 
     }
 
+    /**
+     * @return the created UdFlugt
+     */
     public static UdFlugt createUdflugt(Konference konference, String navn, LocalDate dato, float pris) {
         return Storage.addUdflugt(new UdFlugt(konference, navn, dato, pris));
     }

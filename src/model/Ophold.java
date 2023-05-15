@@ -18,6 +18,10 @@ public class Ophold {
         this.periode = periode;
     }
 
+    public void addTilkøb(TilKøb tilKøb) {
+        this.tilKøb.add(tilKøb);
+    }
+
     public HotelAftale getHotelAftale() {
         return hotelAftale;
     }

@@ -21,14 +21,6 @@ public class App {
 
         //--------------------Deltagere-------------------
 
-        Hotel paradise = Controller.createHotel("Paradise");
-        Controller.createTilkøb(paradise,"Wii tank", 50);
-        Controller.createTilkøb(paradise,"Warhammer 40k: Dark Tide", 150);
-        Controller.createTilkøb(paradise,"Extra blød bed", 9001);
-        Controller.createTilkøb(paradise,"pc med RTX 3080TI + 7900x", 10000);
-        Controller.createTilkøb(paradise,"Danskvand", 20);
-        Controller.createTilkøb(paradise,"Risk of Rain 2", 100);
-
         Controller.createDeltager("Bob Swanson", "88888888");
         Controller.createDeltager("Scarlet Johanson", "12345678", "Marvel");
         Controller.createDeltager("Big Dick Zimmer", "09127623", "WiseCraft");
@@ -39,12 +31,12 @@ public class App {
         Controller.createDeltager("Peter Sommer", "efarf");
         Controller.createDeltager("Lone Jensen", "grgss");
 
-        Ledsager Mads = Controller.createLedsager("Mads Madsen", "6433578", finn);
+        Ledsager mads = Controller.createLedsager("Mads Madsen", "6433578", finn);
         //--------------------Smol test-------------------
 
         LocalDate tilmeldStart = LocalDate.of(2023,8, 2);
 
-        Tilmeld madsTil = Controller.createTilmeld(hav, false, tilmeldStart, 3, finn, Mads);
+        Tilmeld madsTil = Controller.createTilmeld(hav, false, tilmeldStart, 3, finn, mads);
         System.out.println("Mads som normal deltager");
         System.out.println(Controller.getSamletPris(madsTil));
         System.out.println("Mads som fordragsholder");
@@ -54,6 +46,28 @@ public class App {
         //--------------------Hoteller-------------------
         Hotel svane = Controller.createHotel("Den hvide svane");
         Controller.createTilkøb(svane, "Mad", 50);
+
+        Hotel paradise = Controller.createHotel("Paradise");
+        Controller.createTilkøb(paradise,"Wii tank", 50);
+        Controller.createTilkøb(paradise,"Warhammer 40k: Dark Tide", 150);
+        Controller.createTilkøb(paradise,"Extra blød bed", 9001);
+        Controller.createTilkøb(paradise,"pc med RTX 3080TI + 7900x", 10000);
+        Controller.createTilkøb(paradise,"Danskvand", 20);
+        Controller.createTilkøb(paradise,"Risk of Rain 2", 100);
+
+        //--------------------Ophold-------------------
+        HotelAftale doubleBed = Controller.createHotelAftale(0, 700, svane, hav);
+        HotelAftale singleBed = Controller.createHotelAftale(100, 0, paradise, hav);
+
+        Ophold fOphold = Controller.createOphold(madsTil, singleBed, finn, tilmeldStart, 3);
+
+
+        for (TilKøb tilKøb : fOphold.getHotelAftale().getHotel().getTilkøb()) {
+            fOphold.addTilkøb(tilKøb);
+        }
+
+        System.out.println("pris test med ophold");
+
 
 
     }

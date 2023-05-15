@@ -1,5 +1,7 @@
 package model;
 
+import controller.Controller;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
