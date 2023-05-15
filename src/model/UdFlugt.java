@@ -18,6 +18,14 @@ public class UdFlugt {
         this.pris = pris;
     }
 
+    public ArrayList<Ledsager> getLedsagere() {
+        return ledsagere;
+    }
+
+    public void addLedsager(Ledsager ledsager) {
+        ledsagere.add(ledsager);
+    }
+
     public Konference getKonference() {
         return konference;
     }
