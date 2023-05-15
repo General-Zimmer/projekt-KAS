@@ -37,7 +37,7 @@ public class App {
 
         Ledsager hans = Controller.createLedsager("Hans Hansen", "6433578", ulla);
         Ledsager mie = Controller.createLedsager("Mie Sommer", "6433578", peter);
-        Ledsager jan = Controller.createLedsager("Jan Madsen", "6433578", lone  );
+        Ledsager jan = Controller.createLedsager("Jan Madsen", "6433578", lone);
 
         //--------------------Udflugter-------------------
 
