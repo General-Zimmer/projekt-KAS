@@ -1,13 +1,11 @@
 package gui;
 
 import controller.Controller;
-import model.Hotel;
-import model.Konference;
+import model.*;
 
 import java.time.LocalDate;
 
 import javafx.application.Application;
-import model.TilKøb;
 
 public class App {
     public static void main(String[] args) {
@@ -19,7 +17,7 @@ public class App {
         //-------------------Hav og himmel--------------
         LocalDate startDate = LocalDate.of(2023,8, 1);
 
-        Controller.createKonference("Hav og Himmel", "Odense Uni", startDate, 10, 1500);
+        Konference hav = Controller.createKonference("Hav og Himmel", "Odense Uni", startDate, 10, 1500);
 
         //--------------------Deltagere-------------------
 
@@ -35,14 +33,28 @@ public class App {
         Controller.createDeltager("Scarlet Johanson", "12345678", "Marvel");
         Controller.createDeltager("Big Dick Zimmer", "09127623", "WiseCraft");
 
-        Controller.createDeltager("Finn Madsen", "yetegr");
+        Deltager finn = Controller.createDeltager("Finn Madsen", "yetegr");
         Controller.createDeltager("Niels Petersen", "rterse");
         Controller.createDeltager("Ulla Hansen", "trgsr");
         Controller.createDeltager("Peter Sommer", "efarf");
         Controller.createDeltager("Lone Jensen", "grgss");
 
+        Ledsager Mads = Controller.createLedsager("Mads Madsen", "6433578", finn);
+        //--------------------Smol test-------------------
+
+        LocalDate tilmeldStart = LocalDate.of(2023,8, 2);
+
+        Tilmeld madsTil = Controller.createTilmeld(hav, false, tilmeldStart, 3, finn, Mads);
+        System.out.println("Mads som normal deltager");
+        System.out.println(Controller.getSamletPris(madsTil));
+        System.out.println("Mads som fordragsholder");
+        madsTil.setErForedragsholder(true);
+        System.out.println(Controller.getSamletPris(madsTil));
+
         //--------------------Hoteller-------------------
         Hotel svane = Controller.createHotel("Den hvide svane");
         Controller.createTilkøb(svane, "Mad", 50);
+
+
     }
 }

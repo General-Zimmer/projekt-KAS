@@ -5,12 +5,18 @@ import storage.Storage;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Locale;
 
 @SuppressWarnings("unused")
 public abstract class Controller {
 
+    /**
+     *
+     * @param tilmeld
+     * @return
+     */
     public static double getSamletPris(Tilmeld tilmeld) {
-        double samletPris = tilmeld.getKonference().getPrisPerDag()*tilmeld.getKonference().getVarighedDage();
+        double samletPris = !tilmeld.isErForedragsholder() ? tilmeld.getKonference().getPrisPerDag()*tilmeld.getPeriode() : 0;
         for (Ophold ophold : tilmeld.getOphold()) {
             HotelAftale aftale = ophold.getHotelAftale();
             samletPris += ophold.getPeriode()*(aftale.getPrisDagEnkelt()+aftale.getPrisDagDobbelt());
@@ -52,16 +58,25 @@ public abstract class Controller {
         return Storage.addUdflugt(new UdFlugt(konference, navn, dato, pris));
     }
 
-    /*
+    /**
+     *
+     * @return the created Tilmeld
+     */
     public static Tilmeld createTilmeld(Konference konference, boolean erForedragsholder, LocalDate startDato, int periode, Deltager deltager, Ledsager ledsager) {
-        Storage.addtilmeld(new Tilmeld(konference, erForedragsholder, startDato, periode, deltager, ledsager));
+        LocalDate konStart = konference.getStartDato();
+        LocalDate konSlut = konference.getStartDato().plusDays(konference.getVarighedDage());
+
+        if ((konStart.isAfter(startDato) && konSlut.isBefore(startDato)))
+            throw new RuntimeException("Cannot create Tilmeldelse");
+
+
+        return Storage.addtilmeld(new Tilmeld(konference, erForedragsholder, startDato, periode, deltager, ledsager));
     }
 
-     */
 
     /**
      *
-     * @return
+     * @return every tilkøb for the given Hotel
      */
     public static TilKøb createTilkøb(Hotel hotel, String navn, double pris) {
         TilKøb tilKøb = new TilKøb(navn, pris);
