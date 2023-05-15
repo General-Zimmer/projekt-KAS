@@ -66,8 +66,14 @@ public class App {
             fOphold.addTilkøb(tilKøb);
         }
 
-        System.out.println("pris test med ophold");
+        System.out.println("\npris test med ophold\n");
 
+        System.out.println("Mads som normal deltager");
+        madsTil.setErForedragsholder(false);
+        System.out.println(Controller.getSamletPris(madsTil));
+        System.out.println("Mads som fordragsholder");
+        madsTil.setErForedragsholder(true);
+        System.out.println(Controller.getSamletPris(madsTil));
 
 
     }
