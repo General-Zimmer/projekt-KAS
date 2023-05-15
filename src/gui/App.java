@@ -18,6 +18,7 @@ public class App {
         LocalDate startDate = LocalDate.of(2021, 12, 18);
 
         Konference hav = Controller.createKonference("Hav og Himmel", "Odense Uni", startDate, 3, 1500);
+        Konference vand = Controller.createKonference("vand og vandoverflade", "Zimmer Uni", startDate, 3, 9001);
 
         //--------------------Deltagere-------------------
 
@@ -42,6 +43,7 @@ public class App {
         UdFlugt odense = Controller.createUdflugt(hav, "Byrundtur, Odense", startDate, 125);
         UdFlugt ege = Controller.createUdflugt(hav, "Egeskov", startDate, 75);
         UdFlugt trap = Controller.createUdflugt(hav, "Trapholt Museum, Kolding", startDate, 200);
+
 
 
 
