@@ -45,7 +45,11 @@ public abstract class Controller {
         if ((konStart.isAfter(startDato) && konSlut.isBefore(startDato)))
             throw new RuntimeException("Cannot create Tilmeldelse");
 
-        return Storage.addtilmeld(new Tilmeld(konference, erForedragsholder, startDato, periode, deltager, ledsager));
+        Tilmeld tilmeld = new Tilmeld(konference, erForedragsholder, startDato, periode, deltager, ledsager);
+        deltager.addTilmeldelse(tilmeld);
+        konference.addTilmeld(tilmeld);
+
+        return Storage.addtilmeld(tilmeld);
     }
 
     /**

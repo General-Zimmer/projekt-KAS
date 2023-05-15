@@ -21,12 +21,12 @@ public class Gui extends Application {
     private final ListView<Konference> lvwKonfListeHovedMenu = new ListView<>();
     private final ListView<Konference> lvwKonflisteOpretUdflugt = new ListView<>();
     private final ListView<Konference> lvwKonflisteTilmeldingsVindue = new ListView<>();
-    private final ListView<Person> lvwPersonerHovedMenu = new ListView<>();
-    private final ListView<Person> lvwDeltagerTilmeldVindue = new ListView<>();
+    private final ListView<Deltager> lvwPersonerHovedMenu = new ListView<>();
+    private final ListView<Deltager> lvwDeltagerTilmeldVindue = new ListView<>();
     private final ListView<TilKøb> lvwGetTilkøbTilmeldVindue = new ListView<>();
     private final ListView<TilKøb> lvwTilkøbHotelVindue = new ListView<>();
     private final ListView<UdFlugt> lvwGetUdflugtForKonfTilmeldVindue = new ListView<>();
-    private final ListView<HotelAftale> lvwHotelaftale = new ListView<>();
+    //private final ListView<HotelAftale> lvwHotelaftale = new ListView<>();
     private final Button btnOpretKonfHovedMenu = new Button("Opret Konference");
     private final TextField txfStartDatoOpretKonfVindue = new TextField();
     private final TextField txfPeriodeOpretKonfVindue = new TextField();
@@ -57,6 +57,8 @@ public class Gui extends Application {
     private final Button btnOpretTildmeldingHovedMenu = new Button("Opret tilmelding");
     private final Button btnOpretTilmeldingTilmeldVindue = new Button("Opret tilmelding");
     private final TextField txfPeriodeTilmdeldingVindue = new TextField();
+    private final CheckBox cbErforedragsHolder = new CheckBox("Foredragsholder?");
+    private final TextField txfStartDatoTilmeldVindue = new TextField();
 
 
 
@@ -356,12 +358,10 @@ public class Gui extends Application {
         Label lblAntalDage = new Label("Dage: ");
         Label lblUdflugt = new Label("Udflugt");
         Label lblDeltager = new Label("Deltager");
-        Label lvlSenge = new Label("Hotelaftale");
 
         pane.add(lblKonf,0,0);
         pane.add(lblHotel,1,0);
         pane.add(lblTilkøb,2,0);
-        pane.add(lvlSenge,3,0);
         pane.add(lblUdflugt,4,0);
         pane.add(lblDeltager,5,0);
 
@@ -369,7 +369,6 @@ public class Gui extends Application {
         pane.add(lvwKonflisteTilmeldingsVindue,0,1);
         pane.add(lvwHotellerTilmeldingsVindue,1,1);
         pane.add(lvwGetTilkøbTilmeldVindue,2,1);
-        pane.add(lvwHotelaftale,3,1);
 
         lvwHotellerTilmeldingsVindue.setOnMouseClicked(Event -> getTilkøbtForHotelDeltagerVindue());
         lvwKonflisteTilmeldingsVindue.setOnMouseClicked(Event -> getHotelForKonferenceOgUdflugter());
@@ -378,6 +377,8 @@ public class Gui extends Application {
         hbox1.getChildren().addAll(lblAntalDage,txfPeriodeTilmdeldingVindue);
         hbox1.setSpacing(5);
         pane.add(hbox1,0,3);
+        pane.add(cbErforedragsHolder,0,4);
+
 
         pane.add(lvwGetUdflugtForKonfTilmeldVindue,4,1);
 
@@ -390,7 +391,8 @@ public class Gui extends Application {
         pane.setHgap(10);
         pane.setVgap(10);
 
-        pane.add(btnOpretTilmeldingTilmeldVindue,0,4);
+        pane.add(btnOpretTilmeldingTilmeldVindue,0,5);
+        btnOpretTilmeldingTilmeldVindue.setOnAction(Event -> opretTilmelingMetode());
     }
     private void opretKonference(){
 
@@ -446,7 +448,17 @@ public class Gui extends Application {
         opretUdlugtStage.hide();
     }
     private void opretTilmelingMetode(){
+        DateTimeFormatter dateformat = DateTimeFormatter.ofPattern("dd/M/yyyy");
+        LocalDate dato = LocalDate.parse(txfStartDatoTilmeldVindue.getText(),dateformat);
+        int period = Integer.parseInt(txfPeriodeTilmdeldingVindue.getText());
+        Konference konf = (lvwKonflisteTilmeldingsVindue.getSelectionModel().getSelectedItem());
+        boolean foredragsholder = cbErforedragsHolder.isSelected();
+        Deltager deltager = lvwDeltagerTilmeldVindue.getSelectionModel().getSelectedItem();
 
+        Controller.createTilmeld(konf,foredragsholder,dato,period,deltager,null);
+        txfStartDatoTilmeldVindue.clear();
+        txfPeriodeTilmdeldingVindue.clear();
+        opretTilmeldingStage.hide();
     }
 
     private void getTilkøbtForHotelDeltagerVindue(){
@@ -454,8 +466,7 @@ public class Gui extends Application {
         //------Tilkøb----
         lvwGetTilkøbTilmeldVindue.getItems().clear();
         lvwGetTilkøbTilmeldVindue.getItems().addAll(Controller.getTilkøb(lvwHotellerTilmeldingsVindue.getSelectionModel().getSelectedItem()));
-        //------Sengebøk----
-        lvwHotelaftale.getItems().clear();
+
 
 
     }

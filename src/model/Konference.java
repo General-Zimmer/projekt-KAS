@@ -12,7 +12,7 @@ public class Konference {
     private float prisPerDag;
     private final ArrayList<HotelAftale> hotelAftaler = new ArrayList<>();
     private final ArrayList<UdFlugt> udFlugter = new ArrayList<>();
-    private final ArrayList<Person> personer = new ArrayList<>();
+    private final ArrayList<Tilmeld> tilmeldinger = new ArrayList<>();
 
     public Konference(String navn, String sted, LocalDate startDato, int varighedDage, float prisPerDag) {
         this.navn = navn;
@@ -22,15 +22,15 @@ public class Konference {
         this.prisPerDag = prisPerDag;
     }
 
-    public void addPerson(Person person) {
-        personer.add(person);
+    public void addTilmeld(Tilmeld tilmeld) {
+        tilmeldinger.add(tilmeld);
     }
-    public void removePerson(Person person) {
-        personer.remove(person);
+    public void removeTilmeld(Tilmeld tilmeld) {
+        tilmeldinger.remove(tilmeld);
     }
 
-    public ArrayList<Person> getPersoner() {
-        return new ArrayList<>(personer);
+    public ArrayList<Tilmeld> getTilmeldinger() {
+        return new ArrayList<>(tilmeldinger);
     }
 
     public ArrayList<UdFlugt> getUdflugter() {
