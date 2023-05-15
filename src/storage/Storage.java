@@ -11,7 +11,7 @@ public abstract class Storage {
     private static final ArrayList<Hotel> hoteler = new ArrayList<>();
     private static final ArrayList<Person> personer = new ArrayList<>();
     private static final ArrayList<UdFlugt> udflugter = new ArrayList<>();
-    private static final ArrayList<TilKøb> tilKøbene = new ArrayList<>();
+    private static final ArrayList<TilKøb> tilKøbene = new ArrayList<>(); // bruges i GUI
     private static final ArrayList<Tilmeld> tilmeldene = new ArrayList<>();
 
 

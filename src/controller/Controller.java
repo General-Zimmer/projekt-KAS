@@ -46,8 +46,10 @@ public abstract class Controller {
         return Storage.addtilmeld(new Tilmeld(konference, erForedragsholder, startDato, periode, deltager, ledsager));
     }
 
-    public static Ophold createOphold() {
-        return null;
+    public static Ophold createOphold(Tilmeld tilmeld, HotelAftale hotelAftale, Deltager deltager, LocalDate startDato, int periode) {
+        Ophold ophold = new Ophold(hotelAftale, deltager, startDato, periode);
+        tilmeld.addOphold(ophold);
+        return ophold;
     }
 
     /**
