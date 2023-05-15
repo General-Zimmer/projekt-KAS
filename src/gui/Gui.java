@@ -16,21 +16,21 @@ import java.time.format.DateTimeFormatter;
 
 public class Gui extends Application {
 
-    private final ListView<Hotel> lvwHoteller = new ListView<>();
-    private final ListView<Hotel> lvwHoteller2 = new ListView<>();
-    private final ListView<Konference> lvwKonfListe = new ListView<>();
-    private final ListView<Konference> lvwKonfliste2 = new ListView<>();
-    private final ListView<Konference> lvwKonfliste3 = new ListView<>();
-    private final ListView<Person> lvwPersoner = new ListView<>();
-    private final ListView<Person> lvwDeltagerTilmeld = new ListView<>();
-    private final ListView<TilKøb> lvwGetTilkøb = new ListView<>();
-    private final ListView<TilKøb> lvwGetAllTilkøb = new ListView<>();
-    private final ListView<UdFlugt> lvwGetUdflugtForKonf = new ListView<>();
-    private final Button btnOpretKonf = new Button("Opret Konference");
-    private final TextField txfStartDato = new TextField();
-    private final TextField txfPeriode = new TextField();
-    private final TextField txfKonfNavn = new TextField();
-    private final TextField txfPrisPrDag = new TextField();
+    private final ListView<Hotel> lvwHotellerHovedMenu = new ListView<>();
+    private final ListView<Hotel> lvwHotellerTilmeldingsVindue = new ListView<>();
+    private final ListView<Konference> lvwKonfListeHovedMenu = new ListView<>();
+    private final ListView<Konference> lvwKonflisteOpretUdflugt = new ListView<>();
+    private final ListView<Konference> lvwKonflisteTilmeldingsVindue = new ListView<>();
+    private final ListView<Person> lvwPersonerHovedMenu = new ListView<>();
+    private final ListView<Person> lvwDeltagerTilmeldVindue = new ListView<>();
+    private final ListView<TilKøb> lvwGetTilkøbTilmeldVindue = new ListView<>();
+    private final ListView<TilKøb> lvwTilkøbHotelVindue = new ListView<>();
+    private final ListView<UdFlugt> lvwGetUdflugtForKonfTilmeldVindue = new ListView<>();
+    private final Button btnOpretKonfHovedMenu = new Button("Opret Konference");
+    private final TextField txfStartDatoOpretKonfVindue = new TextField();
+    private final TextField txfPeriodeOpretKonfVindue = new TextField();
+    private final TextField txfKonfNavnOpretKonfVindue = new TextField();
+    private final TextField txfPrisPrDagOpretKonfVindue = new TextField();
     private final Button btnOpretKonferencen = new Button("Opret Konference");
     private final Button btnOpretHotel = new Button("Opret hotel");
     private final Button btnOpretDeltager = new Button("Opret Deltager");
@@ -46,18 +46,16 @@ public class Gui extends Application {
 
     private final Button btnOpretDeltager2 = new Button("Opret deltager");
     private final TextField txfLedsagerNavn = new TextField();
-    private final CheckBox wifi = new CheckBox("Wifi");
-    private final CheckBox morgenmad = new CheckBox("Morgenmad");
-    private final CheckBox andet = new CheckBox("Andet");
+
     CheckBox cbShowLedsager = new CheckBox("Tilføj ledsager?");
     private final TextField txfFirma = new TextField();
-    private final TextField txfPlacering = new TextField();
-    private final Button btnOpretUdflugt = new Button("Opret udflugt");
-    private final TextField txfUdflugtNavn = new TextField();
-    private final Button btnOpretUdflugt2 = new Button("Opret udflugt");
-    private final Button btnOpretTildmelding = new Button("Opret tilmelding");
-    private final Button btnOpretTilmelding2 = new Button("Opret tilmelding");
-    private final TextField txfPeriodeTilmdelding = new TextField();
+    private final TextField txfPlaceringKonferenceVindue = new TextField();
+    private final Button btnOpretUdflugtHovedMenu = new Button("Opret udflugt");
+    private final TextField txfUdflugtNavnUdflugtVindue = new TextField();
+    private final Button btnOpretUdflugtUdflugtVindue = new Button("Opret udflugt");
+    private final Button btnOpretTildmeldingHovedMenu = new Button("Opret tilmelding");
+    private final Button btnOpretTilmeldingTilmeldVindue = new Button("Opret tilmelding");
+    private final TextField txfPeriodeTilmdeldingVindue = new TextField();
 
 
 
@@ -83,13 +81,13 @@ public class Gui extends Application {
     private void initContent(GridPane pane) {
 
         //-----------initcontent-------
-        lvwHoteller.getItems().addAll(Controller.getHoteller());
-        lvwKonfListe.getItems().addAll(Controller.getKonferencer());
-        lvwPersoner.getItems().addAll(Controller.getDeltagere());
+        lvwHotellerHovedMenu.getItems().addAll(Controller.getHoteller());
+        lvwKonfListeHovedMenu.getItems().addAll(Controller.getKonferencer());
+        lvwPersonerHovedMenu.getItems().addAll(Controller.getDeltagere());
 
-        pane.add(btnOpretKonf,1 ,5);
+        pane.add(btnOpretKonfHovedMenu,1 ,5);
         HBox hbox5 = new HBox();
-        hbox5.getChildren().addAll(btnOpretKonf);
+        hbox5.getChildren().addAll(btnOpretKonfHovedMenu);
         pane.add(hbox5,0,5);
 
         pane.add(btnOpretHotel,1 ,5);
@@ -104,22 +102,22 @@ public class Gui extends Application {
 
         Label konferenceLabel = new Label("Konference");
         pane.add(konferenceLabel,0,0);
-        pane.add(lvwKonfListe,0,1);
+        pane.add(lvwKonfListeHovedMenu,0,1);
 
         Label hotelLabel = new Label("Hotel");
         pane.add(hotelLabel,3,0);
-        pane.add(lvwHoteller,3,1);
+        pane.add(lvwHotellerHovedMenu,3,1);
 
         Label deltagerLabel = new Label("Deltager");
         pane.add(deltagerLabel,5,0);
-        pane.add(lvwPersoner,5,1);
+        pane.add(lvwPersonerHovedMenu,5,1);
 
         HBox hbox8 = new HBox();
-        hbox8.getChildren().addAll(btnOpretUdflugt);
+        hbox8.getChildren().addAll(btnOpretUdflugtHovedMenu);
         pane.add(hbox8,7,5);
 
         HBox hbox9 = new HBox();
-        hbox9.getChildren().addAll(btnOpretTildmelding);
+        hbox9.getChildren().addAll(btnOpretTildmeldingHovedMenu);
         pane.add(hbox9,9,5);
 
 
@@ -136,7 +134,7 @@ public class Gui extends Application {
         opretKonStage.setResizable(false);
         opretKonStage.hide();
 
-        btnOpretKonf.setOnAction(Event -> createKonferencePopup());
+        btnOpretKonfHovedMenu.setOnAction(Event -> createKonferencePopup());
 
 //------------Hotel popup-----------------------
 
@@ -178,7 +176,7 @@ public class Gui extends Application {
         opretUdlugtStage.setResizable(false);
         opretUdlugtStage.hide();
 
-        btnOpretUdflugt.setOnAction(Event -> createUdflugtPopup());
+        btnOpretUdflugtHovedMenu.setOnAction(Event -> createUdflugtPopup());
 
         //----------------Tilmelding popup----------
         opretTilmeldingStage = new Stage();
@@ -191,7 +189,7 @@ public class Gui extends Application {
         opretTilmeldingStage.setResizable(false);
         opretTilmeldingStage.hide();
 
-        btnOpretTildmelding.setOnAction(Event -> createTilmeldingPopup());
+        btnOpretTildmeldingHovedMenu.setOnAction(Event -> createTilmeldingPopup());
     }
     public void createKonferencePopup() {
 
@@ -213,37 +211,37 @@ public class Gui extends Application {
     private void initContentForConferenceBooking(GridPane pane){
         Label lblStartDato = new Label("Startdato");
         pane.add(lblStartDato,0,2);
-        pane.add(txfStartDato,1,2);
+        pane.add(txfStartDatoOpretKonfVindue,1,2);
         Label lblPeriode = new Label("Periode");
         pane.add(lblPeriode,0,3);
-        pane.add(txfPeriode,1,3);
+        pane.add(txfPeriodeOpretKonfVindue,1,3);
         Label lblKonfNavn = new Label("Konference");
         pane.add(lblKonfNavn,0,4);
-        pane.add(txfKonfNavn,1,4);
+        pane.add(txfKonfNavnOpretKonfVindue,1,4);
 
         Label lblPris = new Label("Pris pr dag");
         pane.add(lblPris,0,5);
-        pane.add(txfPrisPrDag,1,5);
+        pane.add(txfPrisPrDagOpretKonfVindue,1,5);
         HBox hbox4 = new HBox();
 
         HBox hbox1 = new HBox();
-        hbox1.getChildren().addAll(lblStartDato, txfStartDato);
+        hbox1.getChildren().addAll(lblStartDato, txfStartDatoOpretKonfVindue);
         hbox1.setSpacing(22);
         pane.add(hbox1,0,2);
         HBox hBox2 = new HBox();
-        hBox2.getChildren().addAll(lblPeriode, txfPeriode);
+        hBox2.getChildren().addAll(lblPeriode, txfPeriodeOpretKonfVindue);
         hBox2.setSpacing(30);
         pane.add(hBox2,0,3);
         HBox hBox3 = new HBox();
-        hBox3.getChildren().addAll(lblKonfNavn, txfKonfNavn);
+        hBox3.getChildren().addAll(lblKonfNavn, txfKonfNavnOpretKonfVindue);
         hBox3.setSpacing(10);
         pane.add(hBox3,0,4);
-        hbox4.getChildren().addAll(lblPris, txfPrisPrDag);
+        hbox4.getChildren().addAll(lblPris, txfPrisPrDagOpretKonfVindue);
         pane.add(hbox4,0,5);
         hbox4.setSpacing(12);
         Label lblPlacering = new Label("Placering:");
         HBox hbox5 = new HBox();
-        hbox5.getChildren().addAll(lblPlacering,txfPlacering);
+        hbox5.getChildren().addAll(lblPlacering, txfPlaceringKonferenceVindue);
         hbox5.setSpacing(10);
         pane.add(hbox5,0,6);
 
@@ -271,9 +269,9 @@ public class Gui extends Application {
 
         Label lbltilkøb = new Label("Vælg tilkøb");
         pane.add(lbltilkøb,1,0);
-        lvwGetAllTilkøb.getItems().addAll(Controller.getAllTilkøb());
-        pane.add(lvwGetAllTilkøb,1,1);
-        lvwGetAllTilkøb.setMaxHeight(200);
+        lvwTilkøbHotelVindue.getItems().addAll(Controller.getAllTilkøb());
+        pane.add(lvwTilkøbHotelVindue,1,1);
+        lvwTilkøbHotelVindue.setMaxHeight(200);
 
         pane.setPadding(new Insets(10));
         pane.setHgap(10);
@@ -332,21 +330,21 @@ public class Gui extends Application {
         Label lblNavnPåUdflugt = new Label("Navn");
         pane.add(lblNavnPåUdflugt,0,1);
         HBox hbox1 = new HBox();
-        hbox1.getChildren().addAll(lblNavnPåUdflugt, txfUdflugtNavn);
+        hbox1.getChildren().addAll(lblNavnPåUdflugt, txfUdflugtNavnUdflugtVindue);
         hbox1.setSpacing(10);
         pane.add(hbox1,0,1);
 
 
-        lvwKonfliste2.getItems().addAll(Controller.getKonferencer());
-        pane.add(lvwKonfliste2,1,1);
+        lvwKonflisteOpretUdflugt.getItems().addAll(Controller.getKonferencer());
+        pane.add(lvwKonflisteOpretUdflugt,1,1);
 
         pane.setPadding(new Insets(10));
         pane.setHgap(10);
         pane.setVgap(10);
 
-        pane.add(btnOpretUdflugt2,0,2);
+        pane.add(btnOpretUdflugtUdflugtVindue,0,2);
 
-        btnOpretUdflugt2.setOnAction(Event -> opretUdflugtMetode());
+        btnOpretUdflugtUdflugtVindue.setOnAction(Event -> opretUdflugtMetode());
     }
     private void initContentTilmelding(GridPane pane){
         Label lblKonf = new Label("Konference");
@@ -363,62 +361,61 @@ public class Gui extends Application {
         pane.add(lblUdflugt,4,0);
         pane.add(lblDeltager,5,0);
 
-        lvwKonfliste3.getItems().addAll(Controller.getKonferencer());
-        pane.add(lvwKonfliste3,0,1);
+        lvwKonflisteTilmeldingsVindue.getItems().addAll(Controller.getKonferencer());
+        pane.add(lvwKonflisteTilmeldingsVindue,0,1);
 
 
-        lvwHoteller2.getItems().addAll(Controller.getHoteller());
-        pane.add(lvwHoteller2,1,1);
-        pane.add(lvwGetTilkøb,2,1);
-        lvwKonfliste3.onKeyPressedProperty().set(Event -> getSelectedHotel());
+        lvwHotellerTilmeldingsVindue.getItems().addAll(Controller.getHoteller());
+        pane.add(lvwHotellerTilmeldingsVindue,1,1);
+        pane.add(lvwGetTilkøbTilmeldVindue,2,1);
 
-        pane.add(txfPeriodeTilmdelding,3,1);
+        lvwKonflisteTilmeldingsVindue.setOnMouseClicked(Event -> getSelectedHotel());
 
-        pane.add(lvwGetUdflugtForKonf,4,1);
-        lvwKonfliste3.onKeyPressedProperty().set(Event -> getLvwGetUdflugtForKonf());
+        pane.add(txfPeriodeTilmdeldingVindue,3,1);
 
-        lvwDeltagerTilmeld.getItems().addAll(Controller.getDeltagere());
-        pane.add(lvwDeltagerTilmeld,5,1);
+        pane.add(lvwGetUdflugtForKonfTilmeldVindue,4,1);
+        lvwKonflisteTilmeldingsVindue.setOnMouseClicked(Event -> getLvwGetUdflugtForKonf());
+
+        lvwDeltagerTilmeldVindue.getItems().addAll(Controller.getDeltagere());
+        pane.add(lvwDeltagerTilmeldVindue,5,1);
 
 
         pane.setPadding(new Insets(10));
         pane.setHgap(10);
         pane.setVgap(10);
 
-        pane.add(btnOpretTilmelding2,0,3);
+        pane.add(btnOpretTilmeldingTilmeldVindue,0,3);
     }
     private void opretKonference(){
 
         DateTimeFormatter dateFormat =  DateTimeFormatter.ofPattern("dd/M/yyyy");
-        LocalDate date = LocalDate.parse(txfStartDato.getText(),dateFormat);
-        int periode = Integer.parseInt(txfPeriode.getText());
-        float prisPerDag = Float.parseFloat(txfPrisPrDag.getText());
+        LocalDate date = LocalDate.parse(txfStartDatoOpretKonfVindue.getText(),dateFormat);
+        int periode = Integer.parseInt(txfPeriodeOpretKonfVindue.getText());
+        float prisPerDag = Float.parseFloat(txfPrisPrDagOpretKonfVindue.getText());
 
-        Konference konference = Controller.createKonference(txfKonfNavn.getText(),txfPlacering.getText(),date,periode,prisPerDag);
-        lvwKonfListe.getItems().add(konference);
-        lvwKonfliste2.getItems().add(konference);
+        Konference konference = Controller.createKonference(txfKonfNavnOpretKonfVindue.getText(), txfPlaceringKonferenceVindue.getText(),date,periode,prisPerDag);
+        lvwKonfListeHovedMenu.getItems().add(konference);
+        lvwKonflisteOpretUdflugt.getItems().add(konference);
+        lvwKonflisteTilmeldingsVindue.getItems().add(konference);
 
-        txfStartDato.clear();
-        txfPeriode.clear();
-        txfKonfNavn.clear();
-        txfPrisPrDag.clear();
+        txfStartDatoOpretKonfVindue.clear();
+        txfPeriodeOpretKonfVindue.clear();
+        txfKonfNavnOpretKonfVindue.clear();
+        txfPrisPrDagOpretKonfVindue.clear();
         opretKonStage.hide();
     }
     private void opretHotel(){
         Hotel hotel = Controller.createHotel(txfHotelNavn.getText());
-        lvwHoteller.getItems().add(hotel);
-        hotel.addTilkøb(lvwGetAllTilkøb.getSelectionModel().getSelectedItem());
+        lvwHotellerHovedMenu.getItems().add(hotel);
+        hotel.addTilkøb(lvwTilkøbHotelVindue.getSelectionModel().getSelectedItem());
 
         txfHotelNavn.clear();
         opretHotelStage.hide();
-        wifi.setSelected(false);
-        morgenmad.setSelected(false);
-        andet.setSelected(false);
     }
     private void opretDeltager(){
         Deltager deltager = Controller.createDeltager(txfDeltagerNavn.getText(),txftlf.getText(),txfFirma.getText());
         Storage.addPerson(deltager);
-        lvwPersoner.getItems().add(deltager);
+        lvwPersonerHovedMenu.getItems().add(deltager);
 
         txfDeltagerNavn.clear();
         txftlf.clear();
@@ -436,16 +433,16 @@ public class Gui extends Application {
         }
     }
     private void opretUdflugtMetode(){
-        LocalDate dato = lvwKonfListe.getSelectionModel().getSelectedItem().getStartDato();
-        Controller.createUdflugt(lvwKonfListe.getSelectionModel().getSelectedItem(), txfUdflugtNavn.getText(),dato,69);
+        LocalDate dato = lvwKonfListeHovedMenu.getSelectionModel().getSelectedItem().getStartDato();
+        Controller.createUdflugt(lvwKonfListeHovedMenu.getSelectionModel().getSelectedItem(), txfUdflugtNavnUdflugtVindue.getText(),dato,69);
 
-        txfUdflugtNavn.clear();
+        txfUdflugtNavnUdflugtVindue.clear();
         opretUdlugtStage.hide();
     }
     private void getSelectedHotel(){
-        lvwGetTilkøb.getItems().addAll(Controller.getTilkøb(lvwHoteller2.getSelectionModel().getSelectedItem()));
+
     }
     private void getLvwGetUdflugtForKonf(){
-        lvwGetUdflugtForKonf.getItems().addAll(Controller.getUdflugter(lvwKonfliste3.getSelectionModel().getSelectedItem()));
+        lvwGetUdflugtForKonfTilmeldVindue.getItems().addAll(Controller.getUdflugter(lvwKonflisteTilmeldingsVindue.getSelectionModel().getSelectedItem()));
     }
 }
