@@ -3,6 +3,7 @@ package gui;
 import controller.Controller;
 import model.*;
 
+import java.lang.reflect.WildcardType;
 import java.time.LocalDate;
 
 import javafx.application.Application;
@@ -62,7 +63,7 @@ public class App {
 
         //--------------------Hoteller-------------------
         Hotel svane = Controller.createHotel("Den hvide svane");
-        Controller.createTilkøb(svane, "Wifi", 50);
+        TilKøb svaneWifi = Controller.createTilkøb(svane, "Wifi", 50);
 
         Hotel paradise = Controller.createHotel("Paradise");
         Controller.createTilkøb(paradise,"Wii tank", 50);
@@ -72,15 +73,22 @@ public class App {
         Controller.createTilkøb(paradise,"Danskvand", 20);
         Controller.createTilkøb(paradise,"Risk of Rain 2", 100);
 
-        //--------------------Ophold-------------------
+        //--------------------HotelAftaler-------------------
         HotelAftale doubleBed = Controller.createHotelAftale(0, 1250, svane, hav);
         HotelAftale singleBed = Controller.createHotelAftale(1050, 0, svane, hav);
+        HotelAftale luksusBed = Controller.createHotelAftale(10000000, 0, paradise, vand);
 
+        //--------------------Ophold-------------------
         Ophold fOphold = Controller.createOphold(finTil, singleBed, finn, startDate, 3);
         Ophold nOphold = Controller.createOphold(NielsTil, singleBed, niels, startDate, 3);
         Ophold uOphold = Controller.createOphold(ullsaTil, doubleBed, ulla, startDate, 2);
         Ophold pOphold = Controller.createOphold(peterTil, doubleBed, peter, startDate, 3);
         Ophold lOphold = Controller.createOphold(loneTil, doubleBed, lone, startDate, 3);
+
+
+        pOphold.addTilkøb(svaneWifi);
+        lOphold.addTilkøb(svaneWifi);
+
 
 
         System.out.println("priser for tilmeldinger\n");
