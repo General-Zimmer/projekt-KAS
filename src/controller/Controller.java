@@ -16,17 +16,17 @@ public abstract class Controller {
         double samletPris = !tilmeld.isErForedragsholder() ? tilmeld.getKonference().getPrisPerDag()*tilmeld.getPeriode() : 0;
         for (Ophold ophold : tilmeld.getOphold()) {
             HotelAftale aftale = ophold.getHotelAftale();
-            samletPris += ophold.getPeriode()*(aftale.getPrisDagEnkelt()+aftale.getPrisDagDobbelt());
+            int opholdsPeriode = ophold.getPeriode()-1; // Hotel ophold betales kun for nætter
+
+            samletPris += opholdsPeriode*(aftale.getPrisDagEnkelt()+aftale.getPrisDagDobbelt());
 
             for (TilKøb tilKøb : ophold.getTilKøb())
-                samletPris += tilKøb.getPris();
-
-            Ledsager ledsager = tilmeld.getLedsager();
-            if (ledsager != null)
-                for (UdFlugt udFlugt : ledsager.getUdFlugter())
-                    samletPris += udFlugt.getPris();
+                samletPris += opholdsPeriode*tilKøb.getPris();
         }
-
+        Ledsager ledsager = tilmeld.getLedsager();
+        if (ledsager != null)
+            for (UdFlugt udFlugt : ledsager.getUdFlugter())
+                samletPris += udFlugt.getPris();
         return samletPris;
     }
 

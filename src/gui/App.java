@@ -79,9 +79,7 @@ public class App {
         HotelAftale luksusBed = Controller.createHotelAftale(10000000, 0, paradise, vand);
 
         //--------------------Ophold-------------------
-        Ophold fOphold = Controller.createOphold(finTil, singleBed, finn, startDate, 3);
         Ophold nOphold = Controller.createOphold(NielsTil, singleBed, niels, startDate, 3);
-        Ophold uOphold = Controller.createOphold(ullsaTil, doubleBed, ulla, startDate, 2);
         Ophold pOphold = Controller.createOphold(peterTil, doubleBed, peter, startDate, 3);
         Ophold lOphold = Controller.createOphold(loneTil, doubleBed, lone, startDate, 3);
 
