@@ -11,6 +11,13 @@ public class Ophold {
     private LocalDate startDato;
     private int periode;
 
+    public Ophold(HotelAftale hotelAftale, Deltager deltager, LocalDate startDato, int periode) {
+        this.hotelAftale = hotelAftale;
+        this.deltager = deltager;
+        this.startDato = startDato;
+        this.periode = periode;
+    }
+
     public HotelAftale getHotelAftale() {
         return hotelAftale;
     }

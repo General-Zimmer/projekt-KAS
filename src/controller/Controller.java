@@ -31,6 +31,24 @@ public abstract class Controller {
         return samletPris;
     }
 
+    /**
+     *
+     * @return the created Tilmeld
+     */
+    public static Tilmeld createTilmeld(Konference konference, boolean erForedragsholder, LocalDate startDato, int periode, Deltager deltager, Ledsager ledsager) {
+        LocalDate konStart = konference.getStartDato();
+        LocalDate konSlut = konference.getStartDato().plusDays(konference.getVarighedDage());
+
+        if ((konStart.isAfter(startDato) && konSlut.isBefore(startDato)))
+            throw new RuntimeException("Cannot create Tilmeldelse");
+
+
+        return Storage.addtilmeld(new Tilmeld(konference, erForedragsholder, startDato, periode, deltager, ledsager));
+    }
+
+    public static Ophold createOphold() {
+        return null;
+    }
 
     /**
      *
@@ -56,21 +74,6 @@ public abstract class Controller {
 
     public static UdFlugt createUdflugt(Konference konference, String navn, LocalDate dato, float pris) {
         return Storage.addUdflugt(new UdFlugt(konference, navn, dato, pris));
-    }
-
-    /**
-     *
-     * @return the created Tilmeld
-     */
-    public static Tilmeld createTilmeld(Konference konference, boolean erForedragsholder, LocalDate startDato, int periode, Deltager deltager, Ledsager ledsager) {
-        LocalDate konStart = konference.getStartDato();
-        LocalDate konSlut = konference.getStartDato().plusDays(konference.getVarighedDage());
-
-        if ((konStart.isAfter(startDato) && konSlut.isBefore(startDato)))
-            throw new RuntimeException("Cannot create Tilmeldelse");
-
-
-        return Storage.addtilmeld(new Tilmeld(konference, erForedragsholder, startDato, periode, deltager, ledsager));
     }
 
 
